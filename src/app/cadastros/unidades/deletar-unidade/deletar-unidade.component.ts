@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/_resources/_components/alert/alert.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -52,3 +53,4 @@ export class DeletarUnidadeComponent implements OnInit {
 });
   }
 }
+*/

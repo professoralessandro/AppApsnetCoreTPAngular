@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Sedes } from 'src/app/models/Sedes';
@@ -450,5 +451,6 @@ export class CadastroComponent implements OnInit {
 export class Permissions {
   btnCadastrar: boolean;
 }
+*/
 
 
