@@ -1,0 +1,15 @@
+<div class="menu-container" style="z-index: 99;" *ngIf="usuarioLogado()">
+    <ul class="menu clearfix gradiente_menu" style="z-index: 99;">
+        <li><a href="#">Cadastros
+            </a>
+            <ul class="sub-menu clearfix" style="z-index: 99;">
+                <li style="z-index: 99;"><a href="#">Biblioteca</a>
+                    <ul style="z-index: 99;" class="sub-menu clearfix">
+                        <li style="z-index: 99;"><a [routerLink]="['cadastros/livros']">Livros/Autores</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

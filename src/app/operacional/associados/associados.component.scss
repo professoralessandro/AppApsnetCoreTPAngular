@@ -1,0 +1,21 @@
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #f47920;
+    border-color: #f47920;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    color: #f47920;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ffead0;
+}

@@ -1,0 +1,212 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Cadastro de Bloqueio</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+
+  <div *ngIf="this.error" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success" align="center">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="this.success" align="center" class="alert alert-success">
+    <div style="width:400px;margin-top:10px">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
+    <div class="col-md-12 search-add">
+      <button ID="btnVoltar" Class="btn btn-primary pull-left" [routerLink]="['/cadastros/quiosque-bloqueio']">Voltar
+        para
+        busca</button>
+
+      <button ID="btnNovo" Class="btn btn-primary pull-left"
+        [routerLink]="['/cadastros/quiosque-bloqueio/cadastro']">Novo</button>
+      <!-- {{ getAllErrors(f.form) | json }} -->
+      <button ID="btnSalvar" Class="btn btn-primary pull-left" [disabled]="!f.form.valid"
+        (click)="salvar()">Salvar</button>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row" *ngIf="!isNew">
+      <div class="col-xs-6 col-sm-6 col-md-1 col-lg-1">
+        <h5>Código:</h5>
+        <input type="text" disabled required [(ngModel)]="bloqueioQuiosque.bloqueioQuiosqueId" ID="txtTitulo"
+          name="bloqueioQuiosqueId" class="form-control" placeholder="Código">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="clearfix"></div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+        <h5>Descrição:</h5>
+        <input type="text" [(ngModel)]="bloqueioQuiosque.descricao" required #descricao="ngModel" ID="txtdescricao"
+          name="descricao" class="form-control" placeholder="Descrição">
+
+        <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" style="color:red;">
+          <li *ngIf="descricao.errors.required">
+            Descrição é um campo obrigatório.
+          </li>
+        </div>
+
+        <h5>Justificativa</h5>
+        <textarea required class="form-control" name="Text1" [(ngModel)]="bloqueioQuiosque.justificativa" required
+          #justificativa="ngModel" cols="40" rows="5">
+        </textarea>
+
+        <div *ngIf="justificativa.invalid && (justificativa.dirty || justificativa.touched)" style="color:red;">
+          <li *ngIf="justificativa.errors.required">
+            Justificativa é um campo obrigatório.
+          </li>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Ativo:</h5>
+          <input type="checkbox" [(ngModel)]="bloqueioQuiosque.ativo" name="ativo">
+        </div>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h5>Unidade:</h5>
+        <select Class="form-control" required [(ngModel)]="bloqueioQuiosque.sedeId" #sedeId="ngModel" name="sedeId">
+          <option value="undefined">Selecione...</option>
+          <option *ngFor="let item of this.sedes" [value]="item.sedeId">{{item.titulo}}</option>
+        </select>
+
+        <div *ngIf="sedeId.invalid && (sedeId.dirty || sedeId.touched)" style="color:red;">
+          <li *ngIf="sedeId.errors.required">
+            Unidade é um campo obrigatório.
+          </li>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <h5>Data de Início:</h5>
+            <div class="input-group">
+              <input type='text' name="inicio"
+                (dateChanged)="bloqueioQuiosque.dataInicio = ($event.jsdate != null ? $event.jsdate.toISOString() : '')"
+                #di="ngx-mydatepicker" [options]="{dateFormat: 'dd/mm/yyyy'}" ngx-mydatepicker #inicio="ngModel"
+                [(ngModel)]="dataInicio" required class="form-control">
+              <span class="input-group-btn">
+                <input type="image" novalidate class="btn btn-default-calendar" (click)="di.toggleCalendar()"
+                  src="assets/imagens/calendar.png">
+              </span>
+            </div>
+
+            <div *ngIf="inicio.invalid && (inicio.dirty || inicio.touched)" style="color:red;">
+              <li *ngIf="inicio.errors.required">
+                Data Inicio é um campo obrigatório.
+              </li>
+            </div>
+
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <h5>Data Final:</h5>
+            <div class="input-group">
+
+              <input type='text' name="fim" (dateChanged)="bloqueioQuiosque.dataFim = $event.jsdate.toISOString()"
+                #df="ngx-mydatepicker" ngx-mydatepicker #fim="ngModel" [(ngModel)]="dataFim" required
+                class="form-control" [options]="{dateFormat: 'dd/mm/yyyy'}">
+              <span class="input-group-btn">
+                <input type="image" novalidate class="btn btn-default-calendar" (click)="df.toggleCalendar()"
+                  src="assets/imagens/calendar.png">
+              </span>
+            </div>
+            <div *ngIf="fim.invalid && (fim.dirty || fim.touched)" style="color:red;">
+              <li *ngIf="inicio.errors.required">
+                Data Final é um campo obrigatório.
+              </li>
+            </div>
+
+          </div>
+          <!--
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <h5>Data Final:</h5>
+  
+  
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY" ngx-mydatepicker name="mydate"
+                  [(ngModel)]="dataFim" required [options]="myDatePickerOptions" #dm="ngModel" #df="ngx-mydatepicker"
+                  (dateChanged)="bloqueioQuiosque.dataFim = ($event.jsdate != null ? $event.jsdate.toISOString() : '')" />
+  
+                <span class="input-group-btn">
+                  <input type="image" class="btn btn-default-calendar" (click)="df.toggleCalendar()"
+                    src="assets/imagens/calendar.png">
+                </span>
+              </div>
+              <div *ngIf="dm.invalid && (dm.dirty || dm.touched)" style="color:red;">
+                <li *ngIf="dm.errors.required">
+                  Data Fim é um campo obrigatório.
+                </li>
+              </div>
+  
+            </div> -->
+
+          <!-- <input type="date" [(ngModel)] ="bloqueioQuiosque.dataFim | date:'yyyy-MM-dd'" [ngModelOptions]="{standalone: true}" (ngModelChange)="bloqueioQuiosque.dataFim = $event"> -->
+
+          <div *ngIf="!isNew">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- <table *ngIf="this.listaBloqueios.length > 0" class="table list-users" cellspacing="0"
+                    style="border-collapse:collapse;">
+                    <tbody>
+  
+                      <tr style="color:#002678;">
+                        <th class="th-lg"><a style="color:#002678;">N da Churrasqueira</a></th>
+                        <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+                      </tr>
+  
+                      <tr *ngFor="let item of this.listaBloqueios">
+                        <td>{{item.descricao}}</td>
+                        <td>{{item.dataInicio | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{item.dataFim | date: 'dd/MM/yyyy'}}</td>
+                        <td><input type="checkbox" value="" [disabled]="true" [(ngModel)]="item.ativo"></td>
+                        <td><a [routerLink]="['cadastro',item.bloqueioQuiosqueId]" class="glyphicon glyphicon-pencil"
+                            style="cursor: pointer"></a>
+                        </td>
+                        <td><a [routerLink]="['deletar',item.bloqueioQuiosqueId]" class="glyphicon glyphicon-remove"
+                            style="color:red; cursor: pointer"></a></td>
+                      </tr>
+  
+                    </tbody>
+                  </table> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

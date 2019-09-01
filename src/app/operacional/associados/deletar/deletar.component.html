@@ -1,0 +1,30 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Deletar Registro</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <br />
+  <table align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <tr>
+          <td><img src="/assets/imagens/question.png" /></td><blockquote></blockquote>
+          <td><h6 style="white-space: pre;"><b>Deseja realmente exluir o registro ?<br></b></h6></td>
+      </tr>
+    </div>
+  </table>
+    <br />
+    <table align="center">
+      <tr>
+        <td><button ID="btnNovo" Class="btn btn-primary" (click)="deletar()">Sim</button></td>
+        <td><button ID="btnNovo" Class="btn btn-primary" [routerLink]="['../../']">Não</button></td>
+      </tr>
+    </table>
+    <hr>
+</div>

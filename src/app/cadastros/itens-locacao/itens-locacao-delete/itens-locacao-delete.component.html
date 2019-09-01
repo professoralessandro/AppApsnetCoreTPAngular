@@ -1,0 +1,29 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Deletar Registro</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container" align="center">
+  <br>
+  <div class="validationsummary-question" role="alert">
+    
+
+    <table>
+      <tr>
+        <td><img src="/assets/imagens/question.png" /></td>
+        <td><h6 style="white-space:  pre;"><b>{{this.mensagem}}</b></h6></td>
+      </tr>
+    </table>
+  </div>
+
+  <br />
+
+  <button ID="btnNovo" Class="btn btn-primary" (click)="deletar()">Sim</button>
+  <button ID="btnNovo" Class="btn btn-primary" [routerLink]="['/cadastros/itens-locacao']">Não</button>
+</div>

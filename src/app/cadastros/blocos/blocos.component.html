@@ -1,0 +1,100 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Busca de blocos</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+	<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+	 </ngx-loading>
+
+    <div *ngIf="this.errorMessage" align="center">
+        <div style="width:400px;margin-top:10px" class="alert alert-success">
+          <table>
+            <tr>
+              <td><img src="/assets/imagens/exclamation.png" /></td>
+              <td><h6 style="white-space: pre;"><b>{{mensagem}}</b></h6></td>
+            </tr>
+          </table>
+        </div>
+    </div>
+
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar</button>
+    <button ID="btnCadastrar" Class="btn btn-primary pull-left" [routerLink]="['cadastro-blocos']"> Cadastrar Novo
+      Bloco</button>
+  </div> 
+
+  <br>
+  <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Código:</h5>
+      <input (keyup)="Mascara()" (keydown)="Mascara()" maxlength="8" type="text" [(ngModel)]="blocos.blocoId" ID="txtCodigo" name="codigo" mask="00000" class="form-control" placeholder="Codigo">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Unidade:</h5>
+      <select Class="form-control" [(ngModel)]="blocos.sedeId" name="ativo">
+        <option value="">Selecione...</option>
+        <option *ngFor="let item of this.sedes" [value]="item.sedeId">{{item.titulo}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Descrição:</h5>
+      <input type="text" [(ngModel)]="blocos.descricao" ID="txtDescricao" name="descricao" class="form-control" placeholder="Descrição">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Ativo:</h5>
+      <select Class="form-control" [(ngModel)]="blocos.ativo" name="ativo">
+        <option value="true">Ativo</option>
+        <option value="">Todos</option>
+        <option value="false">Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  <br>
+  <table *ngIf="this.listaBlocos.length > 0" class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+    <tbody>
+
+      <tr style="color:#002678;">
+        <th class="th-lg"><a style="color:#002678;">Código</a></th>
+        <th class="th-lg"><a style="color:#002678;">Descrição</a></th>
+        <th class="th-lg"><a style="color:#002678;">Unidade</a></th>
+        <th class="th-lg"><a style="color:#002678;">Ativo</a></th>
+        <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+        <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+      </tr>
+
+      <tr *ngFor="let item of this.bindTable">
+        <td>{{item.codigo}}</td>
+        <td>{{item.descricao}}</td>
+        <td>{{item.unidade}}</td>
+        <td><input type="checkbox" value="" [disabled]="true" [(ngModel)]="item.ativo"></td>
+        
+        <td><a [routerLink]="['cadastro-blocos', item.codigo]" class="glyphicon glyphicon-pencil" style="cursor: pointer"></a></td>
+        <td><a [routerLink]="['deletar',item.codigo]" class="glyphicon glyphicon-remove" style="color:red; cursor: pointer"></a></td>
+      
+      </tr>
+
+    </tbody>
+  </table>
+  
+</div>

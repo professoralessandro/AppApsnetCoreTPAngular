@@ -1,0 +1,114 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Busca Bloqueio de Frequentadores</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+
+  <div *ngIf="required" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>Não há registros para o critério de busca informado!</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar</button>
+    <button ID="btnCadastrar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
+      [routerLink]="['buscar']"> Cadastrar Novo Bloqueio</button>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Código:</h5>
+      <input (keyup)="Mascara()" (keydown)="Mascara()" maxlength="8" type="text"
+        [(ngModel)]="bloqueioFrequentadores.bloqueioFrequentadorId" ID="txtCodigo" name="codigo" mask="000000"
+        class="form-control" placeholder="Codigo do Visitante">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Nome:</h5>
+      <input type="text" maxlength="50" [(ngModel)]="bloqueioFrequentadores.nome" ID="txtNome" name="nome"
+        class="form-control" placeholder="Nome">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>CPF:</h5>
+      <input (keyup)="cpfcnpjmask()" (keydown)="cpfcnpjmask()" maxlength="25" type="text" mask="000.000.000-00"
+        placeholder="CPF" [(ngModel)]="bloqueioFrequentadores.cpf" ID="txtCpf" name="cpf" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Ativo:</h5>
+      <select Class="form-control" [(ngModel)]="ativo" name="ativo">
+        <option value="true">Ativo</option>
+        <option value="">Todos</option>
+        <option value="false">Inativo</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Tipo de Frequentador:</h5>
+      <select Class="form-control" [(ngModel)]="tipoPessoaId" name="ativo">
+        <option value="1">Beneficiário Titular</option>
+        <option value="2">Dependente</option>
+        <option value="3">Visitante</option>
+        <!-- <option value="">Todos</option> -->
+      </select>
+    </div>
+  </div>
+  <br>
+
+  <table *ngIf="this.listaBloqueioFrequentadores.length > 0" class="table list-users" cellspacing="0"
+      id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+      <tbody>
+  
+        <!-- <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index"> -->
+  
+        <tr style="color:#002678;">
+          <th class="th-lg"><a style="color:#002678;">Nome</a></th>
+          <th class="th-lg"><a style="color:#002678;">CPF</a></th>
+          <th class="th-lg"><a style="color:#002678;">Início do bloqueio</a></th>
+          <th class="th-lg"><a style="color:#002678;">Fim do bloqueio</a></th>
+  
+          <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+          <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+        </tr>
+  
+        <tr *ngFor="let item of this.listaBloqueioFrequentadores | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+          <td>{{item.nome}}</td>
+          <td>{{item.cpf}}</td>
+          <td>{{item.dataInicio | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item.dataFim | date: 'dd/MM/yyyy'}}</td>
+          <td><a [routerLink]="['editar', item.bloqueioFrequentadorId]" class="glyphicon glyphicon-pencil"
+              style="cursor: pointer"></a></td>
+          <td><a [routerLink]="['deletar',item.bloqueioFrequentadorId]" class="glyphicon glyphicon-remove"
+              style="color:red; cursor: pointer"></a></td>
+        </tr>
+  
+      </tbody>
+      <pagination-controls (pageChange)="paginaAtual = $event"></pagination-controls>
+    </table>
+</div>

@@ -1,0 +1,216 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Busca de Lotes de Envios</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" id="porralouca">
+</ngx-loading>
+
+<div *ngIf="confirmacao" align="center">
+  <div style="width:475px;margin-top:10px" class="alert alert-success">
+    <table>
+      <tr>
+        <td><img style="width:42px" src="/assets/imagens/question.png" /></td>
+        <td>
+          <h6 style="white-space: pre;"><b>{{mensagem}}</b></h6>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <div style="margin-left:110px">
+            <button ID="btnConfirmarDelecaoSim" (click)="Deletar()" Class="btn btn-primary pull-left">Sim</button>
+            <button ID="btnConfirmarDelecaoNaO" (click)="NaoDeletar()" Class="btn btn-primary pull-left">Não</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
+<div *ngIf="formularioPrincipal" class="container content">
+  <div *ngIf="required" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="success" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="erro" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img style="width:42px" src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="nenhumRegistro" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>Não há registros para o critério de busca informado!</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar</button>
+    <button [routerLink]="['cadastro']" ID="btnCadastrar" *ngIf="permissions.btnCadastrar"
+      Class="btn btn-primary pull-left">Cadastrar</button>
+  </div>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Código:</h5>
+      <input type="text" maxlength="8" (keydown)="Mascara()" (keyup)="Mascara()"
+        [(ngModel)]="mailingLoteEnvios.mailingEmailId" ID="txtCodigo" name="codigo" mask="00000" style="width:240px"
+        class="form-control" placeholder="Código">
+    </div>
+
+    <br />
+    <h5>Data de Envio:</h5>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Nome Lote:</h5>
+      <input maxlength="100" type="text" ID="txtNomeLote" [(ngModel)]="mailingLoteEnvios.nomeLote" name="txtNomeLote"
+        class="form-control" placeholder="Nome Lote" style="width:510px">
+
+      <h5>Ativo:</h5>
+      <select style="width:510px" Class="form-control" name="ativo">
+        <option value="true">Ativo</option>
+        <option value="">Todos</option>
+        <option value="false">Inativo</option>
+      </select>
+
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="row">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <h5>Data de Início:</h5>
+
+            <div class="input-group">
+              <input type='text' name="inicio"
+                (dateChanged)="mailingLoteEnvios.dataInicio = ($event.jsdate != null ? $event.jsdate.toISOString() : '')"
+                #di="ngx-mydatepicker" placeholder="DD/MM/YYYY" ngx-mydatepicker #inicio="ngModel"
+                [(ngModel)]="dataInicio" class="form-control" [options]="{dateFormat: 'dd/mm/yyyy'}">
+              <span class="input-group-btn">
+                <input type="image" novalidate class="btn btn-default-calendar" (click)="di.toggleCalendar()"
+                  src="assets/imagens/calendar.png">
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <h5>Data Final:</h5>
+            <div class="input-group">
+
+              <input type='text' name="fim"
+                (dateChanged)="mailingLoteEnvios.dataFim = ($event.jsdate != null ? $event.jsdate.toISOString() : '')"
+                #df="ngx-mydatepicker" placeholder="DD/MM/YYYY" ngx-mydatepicker #fim="ngModel" [(ngModel)]="dataFim"
+                class="form-control" [options]="{dateFormat: 'dd/mm/yyyy'}">
+              <span class="input-group-btn">
+                <input type="image" novalidate class="btn btn-default-calendar" (click)="df.toggleCalendar()"
+                  src="assets/imagens/calendar.png">
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h5>Status:</h5>
+            <select style="width:510px" [(ngModel)]="this.mailingLoteEnvios.statuId" Class="form-control" name="ativo">
+              <option value="0">Selecione...</option>
+              <option value="1">Enviando</option>
+              <option value="2">Sucesso</option>
+              <option value="3">Pendente de Envio</option>
+              <option value="4">Falha</option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <br>
+        <br>
+        <table *ngIf="this.lstMailingLoteEnvios.length > 0" class="table list-users" cellspacing="0"
+          style="border-collapse:collapse;">
+          <tbody>
+
+            <tr style="color:#002678;">
+              <th class="th-lg"><a style="color:#002678;">Código</a></th>
+              <th class="th-lg"><a style="color:#002678;">Nome Lote</a></th>
+              <th class="th-lg"><a style="color:#002678;">Data Envio</a></th>
+              <th class="th-lg"><a style="color:#002678;">Qtd de Envios</a></th>
+              <th class="th-lg"><a style="color:#002678;">Status</a></th>
+              <th class="th-lg"><a style="color:#002678;">Ativo</a></th>
+              <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+              <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+            </tr>
+
+            <tr *ngFor="let item of this.lstMailingLoteEnvios">
+              <td style="width:50px">{{item.mailingLoteEnvioId}}</td>
+              <td style="width:300px">{{item.nomeLote}}</td>
+              <td>{{item.dataEnvio | date: 'dd/MM/yyyy'}}</td>
+              <td>{{item.qtdEnvios}}</td>
+              <td>{{item.statusDescricao}}</td>
+              <td align="center"><input type="checkbox" [checked]="item.ativo" disabled name="ativo"> </td>
+              <td><a [routerLink]="['cadastro',item.mailingLoteEnvioId]" class="glyphicon glyphicon-pencil"
+                  style="cursor: pointer"></a>
+              </td>
+              <td><a (click)="ConfirmarDelecao(item.mailingLoteEnvioId, item.nomeLote)"
+                  class="glyphicon glyphicon-remove" style="color:red; cursor: pointer"></a></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>

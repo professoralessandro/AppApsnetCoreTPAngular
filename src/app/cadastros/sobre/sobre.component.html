@@ -1,0 +1,68 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Sobre</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" id="porralouca">
+  </ngx-loading>
+
+  <div *ngIf="this.error">
+    <div style="width:400px;margin-top:10px" class="alert alert-success" align="center">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="this.success" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-md-12 search-add">
+    <button ID="btnSalvar" Class="btn btn-primary pull-left" (click)="salvar()">Salvar</button>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" align="left">
+
+      <h5>Titulo:</h5>
+      <input [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9' }" type="text"
+        [(ngModel)]="sobre.titulo" ID="txtTitulo" name="titulo" class="form-control" placeholder="Titulo">
+
+      <h5>Descrição (Leia Mais):</h5>
+      <ckeditor [editor]="Editor1" [(ngModel)]="sobre.descricao" data="(descricao)"></ckeditor>
+
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Trocar Imagem:</h5>
+      <img id="imgUnidade" [src]="imagem" height="200px" />
+      <br />
+      <input #file type="file" accept="image/*" (change)="onSelectFile(file.files, $event)" />
+    </div>
+  </div>
+</div>

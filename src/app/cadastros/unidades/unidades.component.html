@@ -1,0 +1,120 @@
+<div class="container content">
+
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" >
+  </ngx-loading>
+
+  <div *ngIf="error" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>Não há registros para o critério de busca informado!</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscarLivros()" Class="btn btn-primary pull-left">Buscar Livros</button>
+    <button ID="btnBuscar" (click)="buscarAutores()" Class="btn btn-primary pull-left">Buscar Autores</button>
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar Todos</button>
+    <!-- <button ID="btnCadastrar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
+      [routerLink]="['cadastro']"> Cadastrar Nova
+      Unidade</button> -->
+  </div>
+
+  <br>
+  <hr>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <table *ngIf="this.lstAutores.length > 0 && this.isAutor == true  && this.isTodos == false" class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+        <tbody>
+    
+          <tr style="color:#000;">
+            <th class="th-lg"><a style="color:#000;">Nome</a></th>
+            <th class="th-lg"><a style="color:#000;">Email</a></th>
+            <th class="th-lg"><a style="color:#000;">Genero</a></th>
+            
+    
+            <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+          </tr>
+    
+          <tr
+            *ngFor="let item of this.lstAutores | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+            <td>{{item.nome}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.genero}}</td>
+            <td><a [routerLink]="['../editar', item.frequentadorId, item.tipoPessoa, item.bloqueio, 'Frequentadores']"
+                class="glyphicon glyphicon-pencil" style="cursor: pointer"></a></td>
+          </tr>
+        </tbody>
+        <pagination-controls *ngIf="this.lstAutores.length > 9" (pageChange)="paginaAtual = $event">
+        </pagination-controls>
+      </table>
+
+      <table *ngIf="this.lstLivros.length > 0 && this.isAutor == false && this.isTodos == false" class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+        <tbody>
+    
+          <tr style="color:#000;">
+            <th class="th-lg"><a style="color:#000;">Nome</a></th>
+            <th class="th-lg"><a style="color:#000;">Autor</a></th>
+            <th class="th-lg"><a style="color:#000;">Preço</a></th>
+            <th class="th-lg"><a style="color:#000;">Quantidade</a></th>
+            
+            <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+          </tr>
+    
+          <tr
+            *ngFor="let item of this.lstLivros | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+            
+            <td>{{item.nome}}</td>
+            <td>{{item.autor}}</td>
+            <td>{{item.preco}}</td>
+            <td>{{item.quantidade}}</td>
+            <td><a [routerLink]="['../editar', item.frequentadorId, item.tipoPessoa, item.bloqueio, 'Frequentadores']"
+                class="glyphicon glyphicon-pencil" style="cursor: pointer"></a></td>
+          </tr>
+        </tbody>
+        <pagination-controls *ngIf="this.lstAutores.length > 9" (pageChange)="paginaAtual = $event">
+        </pagination-controls>
+      </table>
+
+      <table *ngIf="this.lstAutores.length > 0 && this.isAutor == true && this.isTodos == true" class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+        <tbody>
+    
+          <tr style="color:#000;">
+            <th class="th-lg"><a style="color:#000;">Nome Autor</a></th>
+            <th class="th-lg"><a style="color:#000;">Email</a></th>
+            <th class="th-lg"><a style="color:#000;">Genero</a></th>
+            <th class="th-lg"><a style="color:#000;">Nome Livro</a></th>
+            <th class="th-lg"><a style="color:#000;">Preço</a></th>
+            <th class="th-lg"><a style="color:#000;">Quantidade</a></th>
+    
+            <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+          </tr>
+    
+          <tr
+            *ngFor="let item of this.lstAutores | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+            
+            <td>{{item.nome}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.genero}}</td>
+            <td>{{item.nomeLivro}}</td>
+            <td>{{item.precoLivro}}</td>
+            <td>{{item.quantidadeLivro}}</td>
+            <td><a [routerLink]="['../editar', item.frequentadorId, item.tipoPessoa, item.bloqueio, 'Frequentadores']"
+                class="glyphicon glyphicon-pencil" style="cursor: pointer"></a></td>
+          </tr>
+        </tbody>
+        <pagination-controls *ngIf="this.lstAutores.length > 9" (pageChange)="paginaAtual = $event">
+        </pagination-controls>
+      </table>
+    </div>
+  </div>
+
+</div>

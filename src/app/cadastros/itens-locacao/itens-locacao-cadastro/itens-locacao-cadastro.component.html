@@ -1,0 +1,116 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Cadastro de Itens Locação</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container content">
+
+  <div *ngIf="this.error" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success" align="center">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
+    <div *ngIf="this.success" align="center" class="alert alert-success">
+      <div style="width:400px;margin-top:10px">
+        <table>
+          <tr>
+            <td><img src="/assets/imagens/success.png" /></td>
+            <td>
+              <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-12 search-add">
+      <button ID="btnVoltar" Class="btn btn-primary pull-left" [routerLink]="['/cadastros/itens-locacao']">Voltar para
+        busca</button>
+
+      <button ID="btnNovo" Class="btn btn-primary pull-left"
+        [routerLink]="['/cadastros/itens-locacao/cadastro']">Novo</button>
+
+      <button ID="btnSalvar" Class="btn btn-primary pull-left" [disabled]="!f.form.valid"
+        (click)="salvar()">Salvar</button>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <div class="row" *ngIf="!isNew">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h5>Código:</h5>
+        <input type="text" disabled required [(ngModel)]="bloqueioQuiosque.itensLocacaoTabelaId" ID="txtTitulo"
+          name="itenslocacaotabelaid" class="form-control" placeholder="Código">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h5>Descrição:</h5>
+        <input type="text" required [(ngModel)]="bloqueioQuiosque.descricao" ID="txtTitulo" name="descricao"
+          class="form-control" placeholder="Descrição" #descricao="ngModel">
+
+        <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" style="color:red;">
+          <li *ngIf="descricao.errors.required">
+            Descrição é um campo obrigatório.
+          </li>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h5>Unidade:</h5>
+        <select required Class="form-control" #sede="ngModel" [(ngModel)]="bloqueioQuiosque.sedeId" name="sedeId">
+          <option value="undefined">Selecione...</option>
+          <option *ngFor="let item of this.sedes" [value]="item.sedeId">{{item.titulo}}</option>
+        </select>
+
+        <div *ngIf="sede.invalid && (sede.dirty || sede.touched)" style="color:red;">
+          <li *ngIf="sede.errors.required">
+            Sede é um campo obrigatório.
+          </li>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h5>Tipo Item:</h5>
+        <select #tipoItem="ngModel" required Class="form-control" [(ngModel)]="bloqueioQuiosque.tipoItemId"
+          name="tipoItens">
+          <option value="undefined">Selecione...</option>
+          <option *ngFor="let item of this.tipoItens" [value]="item.tipoItemId">{{item.descricao}}</option>
+        </select>
+
+        <div *ngIf="tipoItem.invalid && (tipoItem.dirty || tipoItem.touched)" style="color:red;">
+          <li *ngIf="tipoItem.errors.required">
+            Tipo item é um campo obrigatório.
+          </li>
+        </div>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h5>Ativo:</h5>
+        <input type="checkbox" [(ngModel)]="bloqueioQuiosque.ativo" name="ativo">
+      </div>
+    </div>
+  </form>
+</div>

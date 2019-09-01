@@ -1,0 +1,140 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Reserva de Quiosques</li>
+        <li> Detalhes </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <div align="center" *ngIf="sucesso" class="alert alert-success">
+    <div style="width:400px;margin-top:10px">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-md-12 search-add">
+    <button ID="btnVoltar" (click)="buscar()" [routerLink]="['/operacional/quiosque']"
+      Class="btn btn-primary pull-left">Voltar Para Busca</button>
+    <button ID="btnImprimir" (click)="Imprimir()" Class="btn btn-primary pull-left">Imprimir Termo</button>
+
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <h5>Nº da Reserva:</h5>
+      <input type="text" id="numeroReserva" name="numeroReserva" [(ngModel)]="Quiosque.reservaQuiosqueId"
+        class="form-control" disabled placeholder="Nº da Reserva">
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <h5>Status:</h5>
+      <input type="text" id="statusReserva" name="statusReserva" [(ngModel)]="Quiosque.statusReserva"
+        class="form-control" disabled placeholder="Status">
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <h5>Data:</h5>
+      <input type="text" id="data" name="data" [(ngModel)]="Quiosque.data" class="form-control" disabled
+        placeholder="DD/MM/YYYY">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+      <h5>Unidade:</h5>
+      <input type="text" id="unidade" name="unidade" [(ngModel)]="Quiosque.titulo" class="form-control" disabled
+        placeholder="Unidade">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Nome do Beneficiário:</h5>
+      <input type="text" id="nomeBeneficiario" name="nomeBeneficiario" [(ngModel)]="Quiosque.nome" class="form-control"
+        disabled placeholder="Nome do Beneficiário">
+    </div>
+  </div>
+
+
+  <br>
+  <div class="row"
+    *ngIf="QuiosqueAtribuido.quiosqueId != 0 && QuiosqueAtribuido.quiosqueId != undefined && QuiosqueAtribuido.quiosqueId != null">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <table class="table list-users" cellspacing="0" style="border-collapse:collapse;">
+        <tbody>
+
+          <tr style="color:#002678;">
+            <th class="th-lg"><a style="color:#002678;">Unidade</a></th>
+            <th class="th-lg"><a style="color:#002678;">Nº da Churrasqueira</a></th>
+            <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+            <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+          </tr>
+          <tr>
+            <td>{{Quiosque.titulo}}</td>
+            <td> {{QuiosqueAtribuido.quiosqueId}} </td>
+            <td style="width:25px;">
+              <a id="ContentPlaceHolder1_grdAcomodacoes_btnEditar_0" title="Alteração de Reserva" class="btn-edicao"
+                (click)="openModal(template)" style="background-color: transparent !important; border: none;">
+                <span aria-hidden="true" class="glyphicon glyphicon-transfer"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+    </ngx-loading>
+
+    <ng-template #template>
+      <div class="modal-header  ">
+        <h4 class="modal-titl pull-left  ">Alteração de Churrasqueira</h4>
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <br>
+      </div>
+
+      <div class="modal-body col-md-12 ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table list-users" cellspacing="0" style="border-collapse:collapse;">
+            <tbody>
+              <tr style="color:#002678;">
+                <th class="th-lg"><a style="color:#002678;"></a></th>
+                <th class="th-lg"><a style="color:#002678;">Unidade</a></th>
+                <th class="th-lg"><a style="color:#002678;">Nº da Churrasqueira</a></th>
+                <th class="th-lg"><a style="color:#002678;">Reserva Atual</a></th>
+              </tr>
+              <tr *ngFor="let quiosque of QuiosqueDisponivel">
+                <td><input type="radio" name="quiosque"
+                    (change)="selecionado(quiosque.quiosqueId, quiosque.reservaOcupacao)" value="id" /></td>
+                <td>{{quiosque.titulo}}</td>
+                <td>{{quiosque.numeroQuiosque}}</td>
+                <td>{{quiosque.reservaOcupacao}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class=" modal-footer ">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <button ID="btnCancelar" (click)="modalRef.hide()" Class="btn btn-primary pull-higth">Cancelar</button>
+          <button ID="btnSalvar" (click)="Salvar()" Class="btn btn-primary pull-higth">Salvar</button>
+        </div>
+      </div>
+    </ng-template>

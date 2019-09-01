@@ -1,0 +1,93 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Busca de Locais de Reserva</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+  
+  <div *ngIf="required" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>Não há registros para o critério de busca informado!</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar</button>
+    <button ID="btnCadastrar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
+      [routerLink]="['cadastro']">Cadastrar Novo Local de Reserva</button>
+  </div>
+
+  <br>
+  <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Código:</h5>
+      <input (keyup)="Mascara()" (keydown)="Mascara()" style="height: 28px" max="999999" maxlength="8" type="text"
+        ID="txtCodigo" [(ngModel)]="locaisReserva.localReservaId" name="codigo" mask="000-00" class="form-control"
+        placeholder="Código do Local de Reserva">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Local:</h5>
+      <input maxlength="50" type="text" ID="txtDescricao" [(ngModel)]="locaisReserva.descricao" name="descricao"
+        class="form-control" placeholder="Descrição">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Ativo:</h5>
+      <select Class="form-control" [(ngModel)]="locaisReserva.ativo" name="ativo">
+        <option value="true">Ativo</option>
+        <option value="">Todos</option>
+        <option value="false">Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  <br>
+  <table *ngIf="this.listaLocais.length > 0" class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca"
+    style="border-collapse:collapse;">
+    <tbody>
+
+      <tr style="color:#002678;">
+        <th class="th-lg"><a style="color:#002678;">Descrição</a></th>
+        <th class="th-lg"><a style="color:#002678;">Ativo</a></th>
+        <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+        <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+      </tr>
+
+      <tr *ngFor="let item of this.listaLocais">
+        <td>{{item.titulo}}</td>
+        <td><input type="checkbox" value="" [disabled]="true" [(ngModel)]="item.ativo"></td>
+        <td><a [routerLink]="['cadastro',item.localReservaId]" class="glyphicon glyphicon-pencil"
+            style="cursor: pointer"></a></td>
+        <td><a [routerLink]="['deletar',item.localReservaId]" class="glyphicon glyphicon-remove"
+            style="color:red; cursor: pointer"></a></td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>

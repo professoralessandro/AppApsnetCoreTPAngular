@@ -1,0 +1,26 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Deletar Registro</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container" align="center">
+  <br>
+  <table align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <tr>
+          <td><img src="/assets/imagens/question.png" /></td><blockquote></blockquote>
+          <td><h6 style="white-space:  pre;"><b>Deseja realmente exluir o tipo de serviço<br>{{ message }} ?</b></h6></td>
+      </tr>
+    </div>
+  </table>
+  <br />
+  <button ID="btnNovo" Class="btn btn-primary" (click)="deletar()">Sim</button>
+  <button ID="btnNovo" Class="btn btn-primary" [routerLink]="['../../']">Não</button>
+  <hr>
+</div>

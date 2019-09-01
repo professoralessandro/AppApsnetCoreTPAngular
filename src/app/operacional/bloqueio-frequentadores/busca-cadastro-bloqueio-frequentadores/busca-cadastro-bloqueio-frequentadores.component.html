@@ -1,0 +1,83 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Cadastro Bloqueio de Frequentadores</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+
+  <div *ngIf="this.error" align="center">
+    <br>
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{this.mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Procurar Frequentador</button>
+  </div>
+  <hr>
+  <br>
+  <h4 style="color: darkorange"><b>Procure o frequentador que deseja bloquear.</b></h4>
+  <hr>
+  <!-- CONTEÚDO -->
+  <!-- CAMPO REMOVIDO POR NOVA ESPECIFICAÇÃO -->
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Tipo de Frequentador:</h5>
+      <select Class="form-control" [(ngModel)]="tipoPessoaId" name="ativo">
+        <option value="1">Beneficiário Titular</option>
+        <option value="2">Dependente</option>
+        <option value="3">Convidado</option>
+        <!-- <option value="">Todos</option> -->
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Nome:</h5>
+      <input type="text" maxlength="50" [(ngModel)]="associado.nome" ID="txtNome" name="nome" class="form-control"
+        placeholder="Nome">
+    </div>
+  </div>
+  <hr>
+  <br>
+
+  <table *ngIf="this.listaFrequentadores.length > 0" class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+    <tbody>
+
+      <tr style="color:#000;">
+        <th class="th-lg"><a style="color:#000;">Nome</a></th>
+        <th class="th-lg"><a style="color:#000;">Tipo</a></th>
+        <th class="th-lg"><a style="color:#000;">Bloqueio</a></th>
+
+        <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+      </tr>
+
+      <tr
+        *ngFor="let item of this.listaFrequentadores | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+        <td>{{item.nome}}</td>
+        <td>{{item.tipoPessoa}}</td>
+        <td>{{item.bloqueio}}</td>
+        <td><a [routerLink]="['../editar', item.frequentadorId, item.tipoPessoa, item.bloqueio]"
+            class="glyphicon glyphicon-pencil" style="cursor: pointer"></a></td>
+      </tr>
+    </tbody>
+    <pagination-controls *ngIf="this.listaFrequentadores.length > 9" (pageChange)="paginaAtual = $event">
+    </pagination-controls>
+  </table>
+</div>
