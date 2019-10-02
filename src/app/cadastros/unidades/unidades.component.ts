@@ -4,7 +4,7 @@ import { LivroService } from 'src/app/services/livro.service';
 import { AutorService } from 'src/app/services/autor.service';
 
 import { ContainerService } from 'src/app/services/container.service';
-import {BlService } from 'src/app/services/bl.service';
+import { BlService } from 'src/app/services/bl.service';
 
 import { Livros } from 'src/app/models/Livro';
 import { Autores } from 'src/app/models/Autor';
@@ -30,8 +30,8 @@ export class UnidadesComponent implements OnInit {
   public lstLivros: Livros[] = [];
   public lstAutores: Autores[] = [];
 
-  public lstbl: Bl[] = [];
-  public lstcontainer: Container[] = [];
+  public lstBls: Bl[] = [];
+  public lstcontainers: Container[] = [];
 
   public autor: Autores = new Autores();
   public livro: Livros = new Livros();
@@ -42,6 +42,8 @@ export class UnidadesComponent implements OnInit {
   constructor(
     private autorService: AutorService,
     private livroService: LivroService,
+    private blService: BlService,
+    private containerService: ContainerService,
     private commonService: CommonService
     ) { }
 
@@ -49,13 +51,51 @@ export class UnidadesComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-
     this.autor = new Autores();
     this.livro = new Livros();
+    this.bl = new Bl();
+    this.container = new Container();
+
+    this.lstAutores = [];
+    this.lstBls = [];
+
     this.loading = false;
   }
 
+  //BUSCA CONTAINERS
   buscarLivros() {
+    this.isTodos = false;
+    this.isAutor = true;
+
+    this.loading = true;
+    this.mensagem = '';
+
+    this.lstcontainers = [];
+
+    this.containerService.getAll().toPromise().then( cts =>{
+      if(cts.length > 0)
+      {
+        this.sucess = true;
+        this.error = false;
+        this.mensagem = '';
+        this.lstcontainers = cts;
+      }
+      else
+      {
+        this.sucess = false;
+        this.error = true;
+        this.mensagem = 'Houve um erro ao buscar por BLs';
+      }
+    })
+    .catch( e => {
+      this.sucess = false;
+      this.error = true;
+      this.mensagem = 'Houve um erro ao buscar por BLs';
+    })
+    .finally(()=> {this.loading = false});
+
+    //METODOS ANTERIORES
+    /*
     this.isTodos = false;
     this.isAutor = false;
 
@@ -67,11 +107,45 @@ export class UnidadesComponent implements OnInit {
             this.livro = new Livros();
             this.lstLivros = [];
             this.lstLivros = a;
-        }).then( e => { this.loading= false;});;
+        }).then( e => { this.loading= false;});
+        */
   }
 
+  //BUSCA BLS
   buscarAutores()
   {
+    this.isTodos = false;
+    this.isAutor = true;
+
+    this.loading = true;
+    this.mensagem = '';
+
+    this.lstBls = [];
+    this.lstcontainers = [];
+
+    this.blService.getAll().toPromise().then( bls =>{
+      if(bls.length > 0)
+      {
+        this.sucess = true;
+        this.error = false;
+        this.mensagem = '';
+        this.lstBls = bls;
+      }
+      else
+      {
+        this.sucess = false;
+        this.error = true;
+        this.mensagem = 'Houve um erro ao buscar por BLs';
+      }
+    })
+    .catch( e => {
+      this.sucess = false;
+      this.error = true;
+      this.mensagem = 'Houve um erro ao buscar por BLs';
+    })
+    .finally(()=> {this.loading = false});
+
+    /*
     this.isTodos = false;
     this.isAutor = true;
 
@@ -95,10 +169,13 @@ export class UnidadesComponent implements OnInit {
         this.mensagem = 'Erro ao buscar os Autores';
       }        
     }).then( e => { this.loading= false;});
+    */
   }
 
+  //BUSCA POR TODOS
   buscar()
   {
+    /*
     this.isTodos = true;
     this.isAutor = true;
 
@@ -121,6 +198,7 @@ export class UnidadesComponent implements OnInit {
         }).then(e => {this.loading = false;});
       });    
     });
+    */
   }
   
 }//CLASS
