@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+
 import { LivroService } from 'src/app/services/livro.service';
 import { AutorService } from 'src/app/services/autor.service';
+
+import { ContainerService } from 'src/app/services/container.service';
+import {BlService } from 'src/app/services/bl.service';
+
 import { Livros } from 'src/app/models/Livro';
 import { Autores } from 'src/app/models/Autor';
+import { Bl } from 'src/app/models/Bl';
+import { Container } from 'src/app/models/Container';
 import { CommonService } from 'src/app/services/common.service';
+
 
 @Component({
   selector: 'app-unidades',
@@ -22,8 +30,14 @@ export class UnidadesComponent implements OnInit {
   public lstLivros: Livros[] = [];
   public lstAutores: Autores[] = [];
 
+  public lstbl: Bl[] = [];
+  public lstcontainer: Container[] = [];
+
   public autor: Autores = new Autores();
   public livro: Livros = new Livros();
+
+  public container: Container = new Container();
+  public bl: Bl = new Bl();
 
   constructor(
     private autorService: AutorService,

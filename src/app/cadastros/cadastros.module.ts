@@ -108,6 +108,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { PortoComponent } from './porto/porto.component';
+import { DeletarComponent } from './porto/deletar/deletar.component';
 
 @NgModule({
   declarations: [
@@ -180,6 +182,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     ItensLocacaoComponent,
     ItensLocacaoCadastroComponent,
     ItensLocacaoDeleteComponent,
+    PortoComponent,
+    DeletarComponent
   ],
   imports: [
     CKEditorModule,
