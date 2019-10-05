@@ -5,5 +5,6 @@ export class Container {
   tamanho: number | null;
   blId: number | null;
   numeroBl: number| null;
-  numeroConsignatario: string | null;
+  nomeConsignatario: string | null;
+  nomeNavio: string | null;
   }

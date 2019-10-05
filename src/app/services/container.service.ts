@@ -11,7 +11,6 @@ export class ContainerService {
   constructor(private http: HttpClient) { }
 
   getAll(containerId?: number, blId?: number, numero?: number, tipo?: string) {
-    debugger;
     var r = this.http.get<Container[]>(`${API_URL}/api/Container?containerId=${containerId != null ? containerId : ''}&blId=${blId != null ? blId : ''}&numero=${numero != null ? numero : ''}&tipo=${tipo != null ? tipo : ''}`);
     return r;
   }

@@ -9,9 +9,9 @@ import { CommonService } from 'src/app/services/common.service';
 
 const routes: Routes = [
   { path: 'porto', component: UnidadesComponent, canActivate: [AuthGuard], data: { role: 'Grupos' } },
-  { path: 'porto/cadastro', component: CadastroComponent },
-  { path: 'porto/cadastro/:id', component: CadastroComponent },
-  { path: 'porto/deletar/:id', component: DeletarUnidadeComponent },
+  { path: 'porto/cadastro/:local', component: CadastroComponent, canActivate: [AuthGuard], data: { role: 'Grupos' } },
+  { path: 'porto/cadastro/:id/:local', component: CadastroComponent, canActivate: [AuthGuard], data: { role: 'Grupos' } },
+  { path: 'porto/deletar/:id', component: DeletarUnidadeComponent, canActivate: [AuthGuard], data: { role: 'Grupos' } },
 ];
 
 @NgModule({
