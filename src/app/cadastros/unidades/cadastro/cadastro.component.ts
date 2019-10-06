@@ -59,6 +59,7 @@ export class CadastroComponent implements OnInit {
     this.isContainer = false;
     this.isNew = false;
     this.bl = new Bl();
+    this.lstBls = [];
     this.container = new Container();
 
     this.router.paramMap.subscribe(c => {
@@ -82,7 +83,6 @@ export class CadastroComponent implements OnInit {
     if(this.isContainer)
     {
       this.blService.getAll().toPromise().then(lbl =>{
-        this.lstBls = [];
         this.lstBls = lbl;
       });
     }

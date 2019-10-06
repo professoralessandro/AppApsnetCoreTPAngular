@@ -19,16 +19,16 @@
 
   <div class="col-md-12 search-add">
     <button ID="btnBuscar" (click)="buscarLivros()" Class="btn btn-primary pull-left">Buscar Containers</button>
-    <button ID="btnBuscar" (click)="buscarAutores()" Class="btn btn-primary pull-left">Buscar Bls</button>
-    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar Todos</button>
-    <button ID="btnBuscar" [routerLink]="['cadastro', 'bl']" Class="btn btn-primary pull-left">Cadastrar BL</button>
-    <button ID="btnBuscar" [routerLink]="['cadastro', 'container']" Class="btn btn-primary pull-left">Cadastrar
+    <button ID="btnBuscar" style="margin-left: 5px" (click)="buscarAutores()" Class="btn btn-primary pull-left">Buscar Bls</button>
+    <button ID="btnBuscar" style="margin-left: 5px" (click)="buscar()" Class="btn btn-primary pull-left">Buscar Todos</button>
+    <button ID="btnBuscar" style="margin-left: 5px" [routerLink]="['cadastro', 'bl']" Class="btn btn-primary pull-left">Cadastrar BL</button>
+    <button ID="btnBuscar" style="margin-left: 5px" [routerLink]="['cadastro', 'container']" Class="btn btn-primary pull-left">Cadastrar
       Container</button>
     <!-- <button ID="btnCadastrar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
       [routerLink]="['cadastro']"> Cadastrar Nova
       Unidade</button> -->
   </div>
-
+  <br>
   <br>
   <hr>
   <br>
@@ -36,7 +36,7 @@
   <!-- AUTOR / BL -->
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <table *ngIf="this.lstBls.length > 0 && this.isAutor == true  && this.isTodos == false" class="table list-users"
+      <table *ngIf="this.lstBls.length > 0 && this.isAutor == true  && this.isTodos == false" class="table table-striped"
         cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
         <tbody>
 
@@ -65,7 +65,7 @@
 
       <!-- LIVRO / CONTAINER -->
       <table *ngIf="this.lstcontainers.length > 0 && this.isAutor == false && this.isTodos == false"
-        class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+        class="table table-striped" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
         <tbody>
 
           <tr style="color:#000;">
@@ -94,7 +94,7 @@
 
       <!-- TODOS -->
       <table *ngIf="this.lstcontainers.length > 0 && this.isAutor == true && this.isTodos == true"
-        class="table list-users" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+        class="table table-striped" cellspacing="0" id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
         <tbody>
 
           <tr style="color:#000;">
