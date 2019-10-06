@@ -38,6 +38,7 @@ export class CadastroComponent implements OnInit {
   public bl: Bl = new Bl();
 
   public isNew : boolean;
+  public title : string;
 
   constructor(
     private autorService: AutorService,
@@ -51,6 +52,7 @@ export class CadastroComponent implements OnInit {
   required: boolean = false;
 
   ngOnInit() {
+    this.loading = true;
     this.isBl = false;
     this.isContainer = false;
     this.isNew = false;
@@ -59,6 +61,7 @@ export class CadastroComponent implements OnInit {
 
     this.router.paramMap.subscribe(c => {
       if (c.get('local') != null) {
+        this.title = c.get('local');
         if(c.get('local') == 'container')
         {
           this.isContainer = true;
@@ -83,10 +86,16 @@ export class CadastroComponent implements OnInit {
             this.container = x[0];         
             this.isNew = false;
           })
+          .then( lbl =>{
+            this.blService.getAll().toPromise().then(lbl =>{
+              this.lstBls = lbl;
+            });
+          })
           .catch( e=> {
             this.error = true;
             this.mensagem = 'Houve um erro ao buscar informações do Container'
-          });
+          })
+          .finally(() => {this.loading = false;});
         }
         else
         {
@@ -129,9 +138,77 @@ export class CadastroComponent implements OnInit {
     this.lstBls = [];
 
     this.loading = false;
+  }//ON INIT
+
+  novoContainer()
+  {
+    this.container.nomeConsignatario = '';
+    this.container.nomeNavio = '';
+    this.container.numero = null;
+    this.container.tamanho = null;
+    this.container.tipo = '';
   }
 
-  
-}
+  novoBl()
+  {
+    this.bl.consignee = '';
+    this.bl.navio = '';
+    this.bl.numero = null;
+  }
+
+  cadastrarContainer()
+  {
+    this.sucess = false;
+    this.error = false;
+
+    this.mensagem = "";
+    if (this.isNew) 
+    {
+      debugger;
+      this.containerService.insert(this.container).toPromise().then(c => {
+        this.sucess = true;
+        this.mensagem = ('Registro inserido com sucesso.');
+      });
+    } else {
+      debugger;
+      this.containerService.edit(this.container).toPromise().then(c => {
+        debugger;
+        this.sucess = true;
+        this.mensagem = ('Registro atualizado com sucesso.');
+      })
+      .catch( e => {
+        debugger;
+        this.error = true;
+        this.mensagem = 'Houve um erro ao inserir o registro.';
+      })
+      .finally(()=> {this.loading = false;});
+    }
+  }
+
+  cadastrarBl()
+  {
+    this.sucess = false;
+    this.error = false;
+
+    this.mensagem = "";
+    if (this.isNew) 
+    {
+      this.blService.insert(this.bl).toPromise().then(c => {
+        this.sucess = true;
+        this.mensagem = ('Registro inserido com sucesso.');
+      });
+    } else {
+      this.blService.edit(this.bl).toPromise().then(c => {
+        this.sucess = true;
+        this.mensagem = ('Registro atualizado com sucesso.');
+      })
+      .catch( e => {
+        this.error = true;
+        this.mensagem = 'Houve um erro ao inserir o registro.';
+      })
+      .finally(()=> {this.loading = false;});
+    }
+  }
+}//CLASS
 
 
