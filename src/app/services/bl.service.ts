@@ -19,6 +19,7 @@ export class BlService {
   }
 
   delete(id: any) {
+    debugger;
     return this.http.delete<void>(`${API_URL}/api/bl?blId=${id}`);
   }
 

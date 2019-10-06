@@ -84,7 +84,7 @@
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <h5>BL:</h5>
         <select Class="form-control" [(ngModel)]="container.blId" ID="txtSede" name="ativo">
-          <option *ngIf="container.blId === undefined || container.blId === mull" value="" selected>Selecione...</option>
+          <option *ngIf="container.blId === undefined || container.blId === mull" value="{{item.blId}}">Selecione...</option>
           <option *ngFor="let item of this.lstBls" [value]="item.blId">{{item.numero}} - {{item.consignee}}</option>
         </select>
       </div>
