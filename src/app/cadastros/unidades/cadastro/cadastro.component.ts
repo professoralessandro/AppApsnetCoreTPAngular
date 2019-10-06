@@ -23,6 +23,7 @@ export class CadastroComponent implements OnInit {
   public sucess : boolean;
   public isContainer : boolean;
   public isBl : boolean;
+  public blIdString : string;
 
   public mensagem = '';
   public lstLivros: Livros[] = [];
@@ -52,6 +53,7 @@ export class CadastroComponent implements OnInit {
   required: boolean = false;
 
   ngOnInit() {
+    this.blIdString = '';
     this.loading = true;
     this.isBl = false;
     this.isContainer = false;
@@ -77,6 +79,14 @@ export class CadastroComponent implements OnInit {
       }   
     });
 
+    if(this.isContainer)
+    {
+      this.blService.getAll().toPromise().then(lbl =>{
+        this.lstBls = [];
+        this.lstBls = lbl;
+      });
+    }
+
     if(this.isContainer )
     {
       this.router.paramMap.subscribe(c => {
@@ -85,11 +95,6 @@ export class CadastroComponent implements OnInit {
             this.loading = false;
             this.container = x[0];         
             this.isNew = false;
-          })
-          .then( lbl =>{
-            this.blService.getAll().toPromise().then(lbl =>{
-              this.lstBls = lbl;
-            });
           })
           .catch( e=> {
             this.error = true;

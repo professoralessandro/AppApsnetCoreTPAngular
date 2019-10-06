@@ -104,6 +104,7 @@ export class UnidadesComponent implements OnInit {
 
     this.lstAutores = [];
     this.lstBls = [];
+    debugger;
 
     this.blService.getAll().toPromise().then(bls => {
       if (bls.length > 0) {
