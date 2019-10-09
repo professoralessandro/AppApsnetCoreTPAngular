@@ -14,9 +14,9 @@
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
   </ngx-loading>
 
-  <div *ngIf="this.error">
-    <div style="width:400px;margin-top:10px" class="alert alert-success" align="center">
-      <table>
+  <div *ngIf="this.error" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-danger">
+      <table align="center">
         <tr>
           <td><img src="/assets/imagens/exclamation.png" /></td>
           <td>
@@ -27,9 +27,10 @@
     </div>
   </div>
 
+
   <div *ngIf="this.sucess" align="center">
     <div style="width:400px;margin-top:10px" class="alert alert-success">
-      <table>
+      <table align="center">
         <tr>
           <td><img src="/assets/imagens/success.png" /></td>
           <td>
@@ -50,7 +51,7 @@
         *ngIf="!this.isNew">
         Novo</button>
 
-      <button style="margin-left: 5px" ID="btnSalvar" [disabled]="!g.valid" (click)="cadastrarContainer()"
+      <button style="margin-left: 5px" ID="btnSalvar" (click)="cadastrarContainer()"
         Class="btn btn-primary pull-left">Salvar</button>
       <br>
     </div>
@@ -58,7 +59,7 @@
     <br>
     <hr>
     <br>
-    <form #g="ngForm" autocomplete="off" (ngSubmit)="onSubmit(g)">
+    <!-- <form #g="ngForm" autocomplete="off" (ngSubmit)="onSubmit(g)"> -->
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <h5>Numero:</h5>
@@ -92,7 +93,7 @@
           </select>
         </div>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
   <div title="container" *ngIf="!this.isContainer">
     <div class="col-md-12 search-add">
@@ -103,14 +104,14 @@
         *ngIf="!this.isNew">
         Novo</button>
 
-      <button style="margin-left: 5px" ID="btnSalvar" [disabled]="!f.valid" (click)="cadastrarBl()"
+      <button style="margin-left: 5px" ID="btnSalvar" (click)="cadastrarBl()"
         Class="btn btn-primary pull-left">Salvar</button>
     </div>
     <br>
     <br>
     <hr>
     <br>
-    <form #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)">
+    <!-- <form #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)"> -->
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <h5>Numero:</h5>
@@ -134,6 +135,6 @@
             class="form-control" placeholder="Navio">
         </div>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </div>
