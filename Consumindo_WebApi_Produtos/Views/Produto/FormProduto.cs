@@ -1,0 +1,220 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Consumindo_WebApi_Produtos.Models;
+
+namespace Consumindo_WebApi_Produtos.Views.Produto
+{
+    public partial class FormProduto : Form
+    {
+        public FormProduto()
+        {
+            InitializeComponent();
+        }
+
+        private void btnObterProodutos_Click(object sender, EventArgs e)
+        {
+            this.GetAllProdutos();
+        }
+
+        string URI = "";
+        int codigoProduto = 1;
+
+        public async void GetAllProdutos()
+        {
+            try
+            {
+                URI = txtURI.Text;
+                using (var client = new HttpClient())
+                {
+                    using (var response = await client.GetAsync(URI))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            //clienteUri = response.Headers.Location;
+                            var ProdutoJsonString = await response.Content.ReadAsStringAsync();
+                            dgvDados.DataSource = JsonConvert.DeserializeObject<Produtos[]>(ProdutoJsonString).ToList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Não foi possível obter o produto : " + response.StatusCode);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
+            }
+        }
+
+        static string mensagem;
+        static Produtos produto = new Produtos();
+        static public Boolean isNew;
+
+        public async void GetProdutoById(int codProduto)
+        {
+            try
+            {
+                //codigoProduto = TextBoxid
+                using (var client = new HttpClient())
+                {
+                    BindingSource bsDados = new BindingSource();
+                    URI = txtURI.Text + "/getById?id=" + codProduto.ToString();
+
+                    HttpResponseMessage response = await client.GetAsync(URI);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var ProdutoJsonString = await response.Content.ReadAsStringAsync();
+                        bsDados.DataSource = JsonConvert.DeserializeObject<Produtos>(ProdutoJsonString);
+
+                        if (isNew)
+                        {
+                            produto = JsonConvert.DeserializeObject<Produtos>(ProdutoJsonString);
+                        }
+                        else
+                        {
+                            dgvDados.DataSource = bsDados;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Falha ao obter o produto : " + response.StatusCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
+            }
+        }
+        /*
+        public async Task<Produto> RetonaProdutoById(int codProduto, bool isReturn)
+        {
+            try
+            {
+                Produto produto = new Produto();
+                using (var client = new HttpClient())
+                {
+                    BindingSource bsDados = new BindingSource();
+                    URI = txtURI.Text + "/" + codProduto.ToString();
+
+                    HttpResponseMessage response = await client.GetAsync(URI);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var ProdutoJsonString = await response.Content.ReadAsStringAsync();
+                        produto = JsonConvert.DeserializeObject<Produto>(ProdutoJsonString);
+                        return produto;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Falha ao obter o produto : " + response.StatusCode);
+                        return produto;
+                    }
+                }
+            }
+            catch
+            {
+                throw new Excessao("Falha ao buscar o produto.");
+            }
+        }
+        */
+        private async void AddProduto()
+        {
+            try
+            {
+                URI = txtURI.Text;
+                Produtos produto = new Produtos();
+                //produto.Id = codProduto;
+                /*
+                produto.Titulo = "NoteBook Lenovo";
+                produto.Resumo = "Notebooks";
+                produto.Autor = "Lenovo";
+                produto.Quantidade = 12;
+                */
+
+                using (var client = new HttpClient())
+                {
+                    var serializedProduto = JsonConvert.SerializeObject(produto);
+                    var content = new StringContent(serializedProduto, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync(URI, content);
+                }
+                GetAllProdutos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
+            }
+        }
+
+        private async void UpdateProduto(int codProduto)
+        {
+            try
+            {
+                URI = txtURI.Text;
+                Produtos produto = new Produtos();
+                produto.Id = codProduto;
+                /*
+                produto.Titulo = "NoteBook Apple";
+                produto.Subtitulo = "Notebooks";
+                produto.Autor = "Apple";
+                produto.Quantidade = 15; // atualizando o preço do produto
+                */
+
+                using (var client = new HttpClient())
+                {
+                    HttpResponseMessage responseMessage = await client.PutAsJsonAsync(URI + "/" + produto.Id, produto);
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Produto atualizado");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Falha ao atualizar o produto : " + responseMessage.StatusCode);
+                    }
+                }
+                GetAllProdutos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
+            }
+        }
+
+
+        private async void DeleteProduto(int codProduto)
+        {
+            try
+            {
+                URI = txtURI.Text;
+                URI += "/?id=" + codProduto;
+                int ProdutoID = codProduto;
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(URI);
+                    HttpResponseMessage responseMessage = await client.DeleteAsync(URI);
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Produto excluído com sucesso");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Falha ao excluir o produto  : " + responseMessage.StatusCode);
+                    }
+                }
+                GetAllProdutos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
+            }
+        }
+    }//CLASS
+}//NAMESPACE
