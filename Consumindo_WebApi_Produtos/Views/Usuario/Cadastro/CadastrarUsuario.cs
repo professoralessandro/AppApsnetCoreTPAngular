@@ -20,7 +20,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             InitializeComponent();
         }
 
-        public FormCadastrar(Int32 idUsuario)
+        public CadastrarUsuario(Int32 idUsuario)
         {
             InitializeComponent();
 
@@ -30,58 +30,24 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             textBoxId.Text = idUsuario.ToString();
         }
 
-        public FormCadastrar(int? Id, string Titulo, string Subtitulo, string Autor, string Resumo, string Capa, int? Quantidade)
+        public CadastrarUsuario(Int32 idUsuario, String nome)
         {
             InitializeComponent();
 
-            if (Id == null || Id < 1)
-            {
-                btnCadastrar.Text = "Cadastrar Usuario";
-            }
-            else
-            {
-                btnCadastrar.Text = "Editar Usuario";
-                textBoxId.Enabled = false;
-                textBoxId.Text = Id.ToString();
-                textBoxTitulo.Text = Titulo;
-                textBoxSubtitulo.Text = Subtitulo;
-                textBoxAutor.Text = Autor;
-                textBoxResumo.Text = Resumo;
-                textBoxCapa.Text = Capa;
-                textBoxQuantidade.Text = Quantidade.ToString();
-            }
-        }
-
-        public void carregaUsuario(Int32 idUsuario)
-        {
-            Usuario usuario = new Usuario();
-            usuario = this.RetornaUsuarioById(idUsuario).Result;
-
-            textBoxTitulo.Text = usuario.Titulo;
-            textBoxSubtitulo.Text = usuario.Subtitulo;
-            textBoxAutor.Text = usuario.Autor;
-            textBoxResumo.Text = usuario.Resumo;
-            textBoxCapa.Text = usuario.Capa;
-            textBoxQuantidade.Text = usuario.Quantidade.ToString();
-        }
-
-        public FormCadastrar()
-        {
-            InitializeComponent();
+            //this.carregaUsuario(idUsuario);
             textBoxId.Enabled = false;
+            textBoxId.Text = idUsuario.ToString();
+            textBoxNome.Text = nome;
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
+        static Usuarios usuario;
 
-        }
-
-        private async Task<Usuarios> RetornaUsuarioById(int? codUsuario)
+        private async void RetornaUsuarioById(int? codUsuario)
         {
             //string URI = "http://localhost:5000/api/usuario?id="+codUsuario;
-            Usuarios usuario = new Usuarios();
             try
             {
+                Usuarios usuario = new Usuarios();
                 using (var client = new HttpClient())
                 {
                     BindingSource bsDados = new BindingSource();
@@ -91,52 +57,18 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                     if (response.IsSuccessStatusCode)
                     {
                         //usuario = new Usuario();
-                        var usuarios = await response.Content.ReadAsAsync<IEnumerable<Usuario>>();
-                        /*
-                        var livrinho = usuarios.Select( livrinho => new
-                        {
-                            
-                        }).ToList()
-                        */
-
-                        textBoxTitulo.Text = usuario.Titulo;
-                        textBoxSubtitulo.Text = usuario.Subtitulo;
-                        textBoxAutor.Text = usuario.Autor;
-                        textBoxResumo.Text = usuario.Resumo;
-                        textBoxCapa.Text = usuario.Capa;
-                        textBoxQuantidade.Text = usuario.Quantidade.ToString();
-
+                        var usuarios = await response.Content.ReadAsAsync<IEnumerable<Usuarios>>();
+                        textBoxNome.Text = usuario.Nome;
+                        textBoxId.Text = usuario.Id.ToString();
                         //dgvDados.DataSource = bsDados;
-                        return usuario;
-                    }
-                    else
-                    {
-                        return usuario;
-                        MessageBox.Show("Falha ao obter o usuario : " + response.StatusCode);
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Excessao("Falha ao buscar o usuario.");
+                MessageBox.Show("Erro :" + ex.Message);
             }
         }
-        /*
-        protected internal override void OnInit(EventArgs e)
-        {
-            var form1 = new Form1();
-            textBoxId.Enabled = false;
-
-            if (form1.idUsuario == null)
-            {
-
-            }
-            else
-            {
-                textBoxId.Text = form1.idUsuario.ToString();
-            }
-        }
-        */
 
         public static String mensagem;
 
@@ -148,12 +80,8 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 string URI = "http://localhost:5000/api/usuario";
                 Usuarios usuario = new Usuarios();
                 //usuario.Id = codUsuario;
-                usuario.Titulo = textBoxTitulo.Text;
-                usuario.Subtitulo = textBoxSubtitulo.Text;
-                usuario.Autor = textBoxAutor.Text;
-                usuario.Resumo = textBoxResumo.Text;
-                usuario.Capa = textBoxCapa.Text;
-                usuario.Quantidade = Convert.ToInt32(textBoxQuantidade.Text);
+                usuario.Nome = textBoxNome.Text;
+                usuario.Ativo = true;
 
                 if (!this.ValidateBook(usuario))
                 {
@@ -164,16 +92,16 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                         var content = new StringContent(serializedUsuario, Encoding.UTF8, "application/json");
                         var result = await client.PostAsync(URI, content);
                     }
-                    MessageBox.Show("Usuario " + usuario.Titulo + " Foi cadastrado com sucesso;");
+                    MessageBox.Show("Usuario " + usuario.Nome + " Foi cadastrado com sucesso;");
                 }
                 else
                 {
                     MessageBox.Show(mensagem);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Excessao("Falha ao adicionar o usuario.");
+                MessageBox.Show("Erro :" + ex.Message);
             }
         }
 
@@ -185,12 +113,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 string URI = "http://localhost:5000/api/usuario";
                 Usuarios usuario = new Usuarios();
                 usuario.Id = Convert.ToInt32(textBoxId.Text);
-                usuario.Titulo = textBoxTitulo.Text;
-                usuario.Subtitulo = textBoxSubtitulo.Text;
-                usuario.Autor = textBoxAutor.Text;
-                usuario.Resumo = textBoxResumo.Text;
-                usuario.Capa = textBoxCapa.Text;
-                usuario.Quantidade = Convert.ToInt32(textBoxQuantidade.Text);
+                usuario.Nome = textBoxNome.Text;
 
                 if (!this.ValidateBook(usuario))
                 {
@@ -201,16 +124,16 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                         var content = new StringContent(serializedUsuario, Encoding.UTF8, "application/json");
                         var result = await client.PutAsync(URI, content);
                     }
-                    MessageBox.Show("Usuario " + usuario.Titulo + " Foi editado com sucesso;");
+                    MessageBox.Show("Usuario " + usuario.Nome + " Foi editado com sucesso;");
                 }
                 else
                 {
                     MessageBox.Show(mensagem);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw new Excessao("Falha ao atualizar o usuario.");
+                MessageBox.Show("Erro :"+ex.Message);
             }
         }
 
@@ -219,14 +142,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             mensagem = "";
             Boolean validador = false;
 
-            if (usuario.Autor.Length == 0)
-            {
-                validador = true;
-                mensagem += "O Campo autor é obrigatório /n";
-            }
-
-
-            if (usuario.Titulo.Length == 0)
+            if (usuario.Nome.Length == 0)
             {
                 validador = true;
                 mensagem += "O Campo titulo é obrigatório /n";
@@ -253,6 +169,14 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 this.UpdateUsuario();
             }
             return;
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            CadastrarUsuario cadastrarUsuario = new CadastrarUsuario();
+            cadastrarUsuario.Show();
+            this.Close();
+            this.Dispose();
         }
     }
 }

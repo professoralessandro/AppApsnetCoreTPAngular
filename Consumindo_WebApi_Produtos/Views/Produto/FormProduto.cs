@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Consumindo_WebApi_Produtos.Models;
+using Consumindo_WebApi_Produtos.Views.Produto.Cadastro;
+using Consumindo_WebApi_Produtos.Views.Usuario;
 
 namespace Consumindo_WebApi_Produtos.Views.Produto
 {
@@ -17,6 +19,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
         public FormProduto()
         {
             InitializeComponent();
+            this.GetAllProdutos();
         }
 
         private void btnObterProodutos_Click(object sender, EventArgs e)
@@ -59,7 +62,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
         static Produtos produto = new Produtos();
         static public Boolean isNew;
 
-        public async void GetProdutoById(int codProduto)
+        public async void GetProdutoById(int codProduto,bool isForm)
         {
             try
             {
@@ -75,12 +78,19 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
                         var ProdutoJsonString = await response.Content.ReadAsStringAsync();
                         bsDados.DataSource = JsonConvert.DeserializeObject<Produtos>(ProdutoJsonString);
 
-                        if (isNew)
+                        if (!isNew)
                         {
                             produto = JsonConvert.DeserializeObject<Produtos>(ProdutoJsonString);
+                            if(isForm)
+                            {
+                                CadastroProduto cadastroProduto = new CadastroProduto(produto.Id, produto.Nome, produto.Preco);
+                                cadastroProduto.Show();
+                                this.Hide();
+                            }
                         }
                         else
                         {
+                            produto = new Produtos();
                             dgvDados.DataSource = bsDados;
                         }
                     }
@@ -89,6 +99,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
                         MessageBox.Show("Falha ao obter o produto : " + response.StatusCode);
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -215,6 +226,78 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
             {
                 MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
             }
+        }
+
+        private void btnProdutosPorId_Click(object sender, EventArgs e)
+        {
+            InputBox();
+            if (codigoProduto != -1)
+            {
+                GetProdutoById(codigoProduto, false);
+            }
+        }
+
+        private void InputBox()
+        {
+            /* usando a função VB.Net para exibir um prompt para o usuário informar a senha */
+            string Prompt = "Informe o código do Livro.";
+            string Titulo = "www.macoratti.net";
+            string Resultado = Microsoft.VisualBasic.Interaction.InputBox(Prompt, Titulo, "9", 600, 350);
+            /* verifica se o resultado é uma string vazia o que indica que foi cancelado. */
+            if (Resultado != "")
+            {
+                codigoProduto = Convert.ToInt32(Resultado);
+            }
+            else
+            {
+                codigoProduto = -1;
+            }
+        }
+
+        private void btnAtualizaProduto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                InputBox();
+                if (codigoProduto != -1)
+                {
+                    isNew = false;
+                    this.GetProdutoById(codigoProduto, true);
+                }
+                else
+                {
+                    isNew = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Houve um erro ao buscar o Produto: "+ ex.Message.ToString());
+            }
+        }
+
+        private void btnDeletarProduto_Click(object sender, EventArgs e)
+        {
+            InputBox();
+            if (codigoProduto != -1)
+            {
+                DeleteProduto(codigoProduto);
+            }
+        }
+
+        private void btnIncluirProduto_Click(object sender, EventArgs e)
+        {
+            isNew = true;
+
+            CadastroProduto cadastroProduto = new CadastroProduto();
+            cadastroProduto.Show();
+            this.Hide();
+        }
+
+        private void btnNavegarUsuario_Click(object sender, EventArgs e)
+        {
+            FormUsuario formUsuario = new FormUsuario();
+            formUsuario.Show();
+            formUsuario.Hide();
         }
     }//CLASS
 }//NAMESPACE

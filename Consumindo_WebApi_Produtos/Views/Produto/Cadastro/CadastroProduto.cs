@@ -18,9 +18,10 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
         public CadastroProduto()
         {
             InitializeComponent();
+            textBoxId.Visible = false;
         }
 
-        public FormCadastrar(Int32 idProduto)
+        public CadastroProduto(Int32 idProduto)
         {
             InitializeComponent();
 
@@ -30,45 +31,23 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
             textBoxId.Text = idProduto.ToString();
         }
 
-        public FormCadastrar(int? Id, string Titulo, string Subtitulo, string Autor, string Resumo, string Capa, int? Quantidade)
-        {
-            InitializeComponent();
-
-            if (Id == null || Id < 1)
-            {
-                btnCadastrar.Text = "Cadastrar Produto";
-            }
-            else
-            {
-                btnCadastrar.Text = "Editar Produto";
-                textBoxId.Enabled = false;
-                textBoxId.Text = Id.ToString();
-                textBoxTitulo.Text = Titulo;
-                textBoxSubtitulo.Text = Subtitulo;
-                textBoxAutor.Text = Autor;
-                textBoxResumo.Text = Resumo;
-                textBoxCapa.Text = Capa;
-                textBoxQuantidade.Text = Quantidade.ToString();
-            }
-        }
-
-        public void carregaProduto(Int32 idProduto)
-        {
-            Produtos produto = new Produtos();
-            produto = this.RetornaProdutoById(idProduto).Result;
-
-            textBoxTitulo.Text = produto.Titulo;
-            textBoxSubtitulo.Text = produto.Subtitulo;
-            textBoxAutor.Text = produto.Autor;
-            textBoxResumo.Text = produto.Resumo;
-            textBoxCapa.Text = produto.Capa;
-            textBoxQuantidade.Text = produto.Quantidade.ToString();
-        }
-
-        public FormCadastrar()
+        public CadastroProduto(int? Id, string nome, decimal? preco)
         {
             InitializeComponent();
             textBoxId.Enabled = false;
+
+            if (Id == null || Id < 1)
+            {
+                btnCadastrarProduto.Text = "Cadastrar Produto";
+            }
+            else
+            {
+                btnCadastrarProduto.Text = "Editar Produto";
+                textBoxId.Enabled = false;
+                textBoxId.Text = Id.ToString();
+                textBoxNome.Text = nome;
+                textBoxPreco.Text = preco.ToString();
+            }
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -76,7 +55,9 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
 
         }
 
-        private async Task<Produtos> RetornaProdutoById(int? codProduto)
+        public static Produtos Produto;
+
+        private async void RetornaProdutoById(int? codProduto)
         {
             //string URI = "http://localhost:5000/api/produto?id="+codProduto;
             Produtos produto = new Produtos();
@@ -91,7 +72,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                     if (response.IsSuccessStatusCode)
                     {
                         //produto = new Produto();
-                        var produtos = await response.Content.ReadAsAsync<IEnumerable<Produto>>();
+                        var produtos = await response.Content.ReadAsAsync<IEnumerable<Produtos>>();
                         /*
                         var livrinho = produtos.Select( livrinho => new
                         {
@@ -99,26 +80,15 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                         }).ToList()
                         */
 
-                        textBoxTitulo.Text = produto.Titulo;
-                        textBoxSubtitulo.Text = produto.Subtitulo;
-                        textBoxAutor.Text = produto.Autor;
-                        textBoxResumo.Text = produto.Resumo;
-                        textBoxCapa.Text = produto.Capa;
-                        textBoxQuantidade.Text = produto.Quantidade.ToString();
+                        textBoxNome.Text = produto.Nome;
+                        textBoxPreco.Text = produto.Preco.ToString();
 
-                        //dgvDados.DataSource = bsDados;
-                        return produto;
-                    }
-                    else
-                    {
-                        return produto;
-                        MessageBox.Show("Falha ao obter o produto : " + response.StatusCode);
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Excessao("Falha ao buscar o produto.");
+                MessageBox.Show("Erro :" + ex.Message);
             }
         }
         /*
@@ -148,12 +118,9 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                 string URI = "http://localhost:5000/api/produto";
                 Produtos produto = new Produtos();
                 //produto.Id = codProduto;
-                produto.Titulo = textBoxTitulo.Text;
-                produto.Subtitulo = textBoxSubtitulo.Text;
-                produto.Autor = textBoxAutor.Text;
-                produto.Resumo = textBoxResumo.Text;
-                produto.Capa = textBoxCapa.Text;
-                produto.Quantidade = Convert.ToInt32(textBoxQuantidade.Text);
+                produto.Nome = textBoxNome.Text;
+                produto.Preco = Convert.ToDecimal(textBoxPreco.Text);
+                produto.Ativo = true;
 
                 if (!this.ValidateBook(produto))
                 {
@@ -164,16 +131,16 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                         var content = new StringContent(serializedProduto, Encoding.UTF8, "application/json");
                         var result = await client.PostAsync(URI, content);
                     }
-                    MessageBox.Show("Produto " + produto.Titulo + " Foi cadastrado com sucesso;");
+                    MessageBox.Show("Produto " + produto.Nome + " Foi cadastrado com sucesso;");
                 }
                 else
                 {
                     MessageBox.Show(mensagem);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Excessao("Falha ao adicionar o produto.");
+                MessageBox.Show("Erro :" + ex.Message);
             }
         }
 
@@ -185,12 +152,8 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                 string URI = "http://localhost:5000/api/produto";
                 Produtos produto = new Produtos();
                 produto.Id = Convert.ToInt32(textBoxId.Text);
-                produto.Titulo = textBoxTitulo.Text;
-                produto.Subtitulo = textBoxSubtitulo.Text;
-                produto.Autor = textBoxAutor.Text;
-                produto.Resumo = textBoxResumo.Text;
-                produto.Capa = textBoxCapa.Text;
-                produto.Quantidade = Convert.ToInt32(textBoxQuantidade.Text);
+                produto.Nome = textBoxNome.Text;
+                produto.Preco = Convert.ToDecimal(textBoxPreco.Text);
 
                 if (!this.ValidateBook(produto))
                 {
@@ -201,16 +164,16 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                         var content = new StringContent(serializedProduto, Encoding.UTF8, "application/json");
                         var result = await client.PutAsync(URI, content);
                     }
-                    MessageBox.Show("Produto " + produto.Titulo + " Foi editado com sucesso;");
+                    MessageBox.Show("Produto " + produto.Nome + " Foi editado com sucesso;");
                 }
                 else
                 {
                     MessageBox.Show(mensagem);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Excessao("Falha ao atualizar o produto.");
+                MessageBox.Show("Erro :" + ex.Message);
             }
         }
 
@@ -219,17 +182,10 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
             mensagem = "";
             Boolean validador = false;
 
-            if (produto.Autor.Length == 0)
+            if (produto.Nome.Length == 0)
             {
                 validador = true;
                 mensagem += "O Campo autor é obrigatório /n";
-            }
-
-
-            if (produto.Titulo.Length == 0)
-            {
-                validador = true;
-                mensagem += "O Campo titulo é obrigatório /n";
             }
 
             if (validador.Equals(true))
@@ -244,7 +200,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
 
         private void btnCadastrarProduto_Click(object sender, EventArgs e)
         {
-            if ((Convert.ToInt32(textBoxId.Text) < 1 || String.IsNullOrEmpty(textBoxId.Text)))
+            if (String.IsNullOrEmpty(textBoxId.Text))
             {
                 this.AddProduto();
             }
@@ -253,6 +209,14 @@ namespace Consumindo_WebApi_Produtos.Views.Produto.Cadastro
                 this.UpdateProduto();
             }
             return;
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            FormProduto formProduto = new FormProduto();
+            formProduto.Show();
+            this.Close();
+            this.Dispose();
         }
     }
 }

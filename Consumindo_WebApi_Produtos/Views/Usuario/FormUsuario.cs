@@ -1,4 +1,6 @@
 ﻿using Consumindo_WebApi_Produtos.Models;
+using Consumindo_WebApi_Produtos.Views.Produto;
+using Consumindo_WebApi_Produtos.Views.Usuario.Cadastro;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
         public FormUsuario()
         {
             InitializeComponent();
+            this.GetAllUsuarios();
         }
 
         private void btnObterUsuarios_Click(object sender, EventArgs e)
@@ -216,6 +219,61 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
             {
                 MessageBox.Show("Falha ao buscar o usuario: " + ex.Message);
             }
+        }
+
+        private void btnAtualizaUsuario_Click(object sender, EventArgs e)
+        {
+            InputBox();
+
+            isNew = true;
+
+            if (codigoUsuario != -1)
+            {
+                this.GetUsuarioById(codigoUsuario);
+                if (usuario.Nome != "")
+                {
+                    CadastrarUsuario cadastrarUsuario = new CadastrarUsuario(usuario.Id, usuario.Nome);
+                    cadastrarUsuario.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Houve um erro ao buscar o Produto");
+                }
+            }
+        }
+
+        private void InputBox()
+        {
+            /* usando a função VB.Net para exibir um prompt para o usuário informar a senha */
+            string Prompt = "Informe o código do Usuario.";
+            string Titulo = "www.macoratti.net";
+            string Resultado = Microsoft.VisualBasic.Interaction.InputBox(Prompt, Titulo, "9", 600, 350);
+            /* verifica se o resultado é uma string vazia o que indica que foi cancelado. */
+            if (Resultado != "")
+            {
+                codigoUsuario = Convert.ToInt32(Resultado);
+            }
+            else
+            {
+                codigoUsuario = -1;
+            }
+        }
+
+        private void btnIncluirUsuario_Click(object sender, EventArgs e)
+        {
+            isNew = false;
+
+            CadastrarUsuario cadastrarUsuario = new CadastrarUsuario();
+            cadastrarUsuario.Show();
+            this.Hide();
+        }
+
+        private void btnNavegarProduto_Click(object sender, EventArgs e)
+        {
+            FormProduto formProduto = new FormProduto();
+            formProduto.Show();
+            formProduto.Hide();
         }
     }//CLASS
 }//NAMESPACE

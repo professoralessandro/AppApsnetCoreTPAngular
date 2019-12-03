@@ -9,6 +9,7 @@ using Consumindo_WebApi_Produtos.Models;
 using Consumindo_WebApi_Produtos.Common;
 using Consumindo_WebApi_Produtos.Cadastrar;
 using System.Threading.Tasks;
+using Consumindo_WebApi_Produtos.Views.Produto;
 
 namespace Consumindo_WebApi_Produtos
 {
@@ -68,11 +69,21 @@ namespace Consumindo_WebApi_Produtos
 
         private void btnDeletarLivro_Click(object sender, EventArgs e)
         {
+            if(txtbNome.Text.Equals("admin") && txtbSenha.Text.Equals("admin"))
+            {
+                FormProduto formProduto = new FormProduto();
+                formProduto.Show();
+                this.Hide();
+            }
+            
+            //CODIGO ANT
+            /*
             InputBox();
             if (codigoLivro != -1)
             {
                 DeleteLivro(codigoLivro);
             }
+            */
         }
 
         private void InputBox()
@@ -96,7 +107,7 @@ namespace Consumindo_WebApi_Produtos
         {
             try
             {
-                URI = txtURI.Text;
+                //URI = txtNome.Text;
                 using (var client = new HttpClient())
                 {
                     using (var response = await client.GetAsync(URI))
@@ -105,7 +116,7 @@ namespace Consumindo_WebApi_Produtos
                         {
                             //clienteUri = response.Headers.Location;
                             var LivroJsonString = await response.Content.ReadAsStringAsync();
-                            dgvDados.DataSource = JsonConvert.DeserializeObject<Livro[]>(LivroJsonString).ToList();
+                            //dgvDados.DataSource = JsonConvert.DeserializeObject<Livro[]>(LivroJsonString).ToList();
                         }
                         else
                         {
@@ -127,7 +138,7 @@ namespace Consumindo_WebApi_Produtos
             try
             {
                 mensagem = "";
-                URI = txtURI.Text;
+                //URI = txtNome.Text;
                 URI += "getbyid?id=" + codLivro;
                 Livro livro = new Livro();
                 using (var client = new HttpClient())
@@ -164,7 +175,7 @@ namespace Consumindo_WebApi_Produtos
                 using (var client = new HttpClient())
                 {
                     BindingSource bsDados = new BindingSource();
-                    URI = txtURI.Text + "/getById?id=" + codLivro.ToString();
+                    //URI = txtNome.Text + "/getById?id=" + codLivro.ToString();
 
                     HttpResponseMessage response = await client.GetAsync(URI);
                     if (response.IsSuccessStatusCode)
@@ -178,7 +189,7 @@ namespace Consumindo_WebApi_Produtos
                         }
                         else
                         {
-                            dgvDados.DataSource = bsDados;
+                            //dgvDados.DataSource = bsDados;
                         }
                     }
                     else
@@ -227,7 +238,7 @@ namespace Consumindo_WebApi_Produtos
         {
             try
             {
-                URI = txtURI.Text;
+                //URI = txtNome.Text;
                 Livro livro = new Livro();
                 //livro.Id = codLivro;
                 livro.Titulo = "NoteBook Lenovo";
@@ -253,7 +264,7 @@ namespace Consumindo_WebApi_Produtos
         {
             try
             {
-                URI = txtURI.Text;
+                //URI = txtNome.Text;
                 Livro livro = new Livro();
                 livro.Id = codLivro;
                 livro.Titulo = "NoteBook Apple";
@@ -286,7 +297,7 @@ namespace Consumindo_WebApi_Produtos
         {
             try
             {
-                URI = txtURI.Text;
+                //URI = txtNome.Text;
                 URI += "/?id=" + codLivro;
                 int LivroID = codLivro;
                 using (var client = new HttpClient())
@@ -308,11 +319,6 @@ namespace Consumindo_WebApi_Produtos
             {
                 throw new Excessao("Falha ao atualizar o livro.");
             }
-        }
-
-        private void TxtURI_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
