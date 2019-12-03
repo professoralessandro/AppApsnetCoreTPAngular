@@ -106,37 +106,6 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
                 MessageBox.Show("Falha ao buscar o produto: " + ex.Message);
             }
         }
-        /*
-        public async Task<Produto> RetonaProdutoById(int codProduto, bool isReturn)
-        {
-            try
-            {
-                Produto produto = new Produto();
-                using (var client = new HttpClient())
-                {
-                    BindingSource bsDados = new BindingSource();
-                    URI = txtURI.Text + "/" + codProduto.ToString();
-
-                    HttpResponseMessage response = await client.GetAsync(URI);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var ProdutoJsonString = await response.Content.ReadAsStringAsync();
-                        produto = JsonConvert.DeserializeObject<Produto>(ProdutoJsonString);
-                        return produto;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Falha ao obter o produto : " + response.StatusCode);
-                        return produto;
-                    }
-                }
-            }
-            catch
-            {
-                throw new Excessao("Falha ao buscar o produto.");
-            }
-        }
-        */
         private async void AddProduto()
         {
             try
@@ -297,7 +266,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
         {
             FormUsuario formUsuario = new FormUsuario();
             formUsuario.Show();
-            formUsuario.Hide();
+            this.Hide();
         }
     }//CLASS
 }//NAMESPACE

@@ -18,6 +18,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
         public CadastrarUsuario()
         {
             InitializeComponent();
+            this.textBoxId.Enabled = false;
         }
 
         public CadastrarUsuario(Int32 idUsuario)
@@ -173,8 +174,8 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
-            CadastrarUsuario cadastrarUsuario = new CadastrarUsuario();
-            cadastrarUsuario.Show();
+            FormUsuario formUsuario = new FormUsuario();
+            formUsuario.Show();
             this.Close();
             this.Dispose();
         }

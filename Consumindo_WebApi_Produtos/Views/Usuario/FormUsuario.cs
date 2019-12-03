@@ -63,7 +63,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
         static Usuarios usuario = new Usuarios();
         static public Boolean isNew;
 
-        public async void GetUsuarioById(int codUsuario)
+        public async void GetUsuarioById(int codUsuario, bool isForm)
         {
             try
             {
@@ -79,9 +79,23 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
                         var UsuarioJsonString = await response.Content.ReadAsStringAsync();
                         bsDados.DataSource = JsonConvert.DeserializeObject<Usuarios>(UsuarioJsonString);
 
-                        if (isNew)
+                        if (!isNew)
                         {
                             usuario = JsonConvert.DeserializeObject<Usuarios>(UsuarioJsonString);
+
+                            if(isForm)
+                            {
+                                if (usuario.Nome != "")
+                                {
+                                    CadastrarUsuario cadastrarUsuario = new CadastrarUsuario(usuario.Id, usuario.Nome);
+                                    cadastrarUsuario.Show();
+                                    this.Hide();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Houve um erro ao buscar o Produto");
+                                }
+                            }
                         }
                         else
                         {
@@ -99,50 +113,12 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
                 MessageBox.Show("Falha ao buscar o usuario: " + ex.Message);
             }
         }
-        /*
-        public async Task<Usuario> RetonaUsuarioById(int codUsuario, bool isReturn)
-        {
-            try
-            {
-                Usuario usuario = new Usuario();
-                using (var client = new HttpClient())
-                {
-                    BindingSource bsDados = new BindingSource();
-                    URI = txtURI.Text + "/" + codUsuario.ToString();
-
-                    HttpResponseMessage response = await client.GetAsync(URI);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var UsuarioJsonString = await response.Content.ReadAsStringAsync();
-                        usuario = JsonConvert.DeserializeObject<Usuario>(UsuarioJsonString);
-                        return usuario;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Falha ao obter o usuario : " + response.StatusCode);
-                        return usuario;
-                    }
-                }
-            }
-            catch
-            {
-                throw new Excessao("Falha ao buscar o usuario.");
-            }
-        }
-        */
         private async void AddUsuario()
         {
             try
             {
                 URI = txtURI.Text;
                 Usuarios usuario = new Usuarios();
-                //usuario.Id = codUsuario;
-                /*
-                usuario.Titulo = "NoteBook Lenovo";
-                usuario.Resumo = "Notebooks";
-                usuario.Autor = "Lenovo";
-                usuario.Quantidade = 12;
-                */
 
                 using (var client = new HttpClient())
                 {
@@ -165,12 +141,6 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
                 URI = txtURI.Text;
                 Usuarios usuario = new Usuarios();
                 usuario.Id = codUsuario;
-                /*
-                usuario.Titulo = "NoteBook Apple";
-                usuario.Subtitulo = "Notebooks";
-                usuario.Autor = "Apple";
-                usuario.Quantidade = 15; // atualizando o preço do usuario
-                */
 
                 using (var client = new HttpClient())
                 {
@@ -229,17 +199,8 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
 
             if (codigoUsuario != -1)
             {
-                this.GetUsuarioById(codigoUsuario);
-                if (usuario.Nome != "")
-                {
-                    CadastrarUsuario cadastrarUsuario = new CadastrarUsuario(usuario.Id, usuario.Nome);
-                    cadastrarUsuario.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Houve um erro ao buscar o Produto");
-                }
+                isNew = false;
+                this.GetUsuarioById(codigoUsuario, true);
             }
         }
 
@@ -262,7 +223,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
 
         private void btnIncluirUsuario_Click(object sender, EventArgs e)
         {
-            isNew = false;
+            isNew = true;
 
             CadastrarUsuario cadastrarUsuario = new CadastrarUsuario();
             cadastrarUsuario.Show();
