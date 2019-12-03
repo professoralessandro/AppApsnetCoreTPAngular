@@ -236,5 +236,10 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
             formProduto.Show();
             formProduto.Hide();
         }
+
+        private void btnUsuariosPorId_Click(object sender, EventArgs e)
+        {
+
+        }
     }//CLASS
 }//NAMESPACE

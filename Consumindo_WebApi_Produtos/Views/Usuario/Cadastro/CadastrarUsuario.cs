@@ -31,7 +31,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             textBoxId.Text = idUsuario.ToString();
         }
 
-        public CadastrarUsuario(Int32 idUsuario, String nome)
+        public CadastrarUsuario(Int32 idUsuario, String nome, String senha)
         {
             InitializeComponent();
 
@@ -39,6 +39,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             textBoxId.Enabled = false;
             textBoxId.Text = idUsuario.ToString();
             textBoxNome.Text = nome;
+            textBoxSenha.Text = senha;
         }
 
         static Usuarios usuario;
@@ -60,6 +61,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                         //usuario = new Usuario();
                         var usuarios = await response.Content.ReadAsAsync<IEnumerable<Usuarios>>();
                         textBoxNome.Text = usuario.Nome;
+                        textBoxSenha.Text = usuario.Senha;
                         textBoxId.Text = usuario.Id.ToString();
                         //dgvDados.DataSource = bsDados;
                     }
@@ -82,6 +84,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 Usuarios usuario = new Usuarios();
                 //usuario.Id = codUsuario;
                 usuario.Nome = textBoxNome.Text;
+                usuario.Senha = textBoxSenha.Text;
                 usuario.Ativo = true;
 
                 if (!this.ValidateBook(usuario))
@@ -115,6 +118,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 Usuarios usuario = new Usuarios();
                 usuario.Id = Convert.ToInt32(textBoxId.Text);
                 usuario.Nome = textBoxNome.Text;
+                usuario.Senha = textBoxSenha.Text;
 
                 if (!this.ValidateBook(usuario))
                 {
@@ -161,7 +165,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
 
         private void btnCadastrarUsuario_Click(object sender, EventArgs e)
         {
-            if ((Convert.ToInt32(textBoxId.Text) < 1 || String.IsNullOrEmpty(textBoxId.Text)))
+            if (String.IsNullOrEmpty(textBoxId.Text))
             {
                 this.AddUsuario();
             }

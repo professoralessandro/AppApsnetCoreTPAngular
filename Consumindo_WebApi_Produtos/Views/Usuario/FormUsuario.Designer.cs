@@ -104,6 +104,7 @@
             this.btnUsuariosPorId.TabIndex = 15;
             this.btnUsuariosPorId.Text = "Obter Usuario Por ID";
             this.btnUsuariosPorId.UseVisualStyleBackColor = false;
+            this.btnUsuariosPorId.Click += new System.EventHandler(this.btnUsuariosPorId_Click);
             // 
             // btnObterUsuarios
             // 

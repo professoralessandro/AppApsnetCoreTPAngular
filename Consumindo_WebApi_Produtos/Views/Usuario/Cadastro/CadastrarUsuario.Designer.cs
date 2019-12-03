@@ -34,13 +34,15 @@
             this.labelNome = new System.Windows.Forms.Label();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
+            this.textBoxSenha = new System.Windows.Forms.TextBox();
+            this.labelSenha = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCadastrarUsuario
             // 
             this.btnCadastrarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnCadastrarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCadastrarUsuario.Location = new System.Drawing.Point(259, 122);
+            this.btnCadastrarUsuario.Location = new System.Drawing.Point(261, 173);
             this.btnCadastrarUsuario.Name = "btnCadastrarUsuario";
             this.btnCadastrarUsuario.Size = new System.Drawing.Size(231, 44);
             this.btnCadastrarUsuario.TabIndex = 48;
@@ -52,7 +54,7 @@
             // 
             this.btnVoltar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnVoltar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoltar.Location = new System.Drawing.Point(22, 122);
+            this.btnVoltar.Location = new System.Drawing.Point(24, 173);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(231, 44);
             this.btnVoltar.TabIndex = 47;
@@ -96,12 +98,32 @@
             this.labelId.TabIndex = 33;
             this.labelId.Text = "ID:";
             // 
+            // textBoxSenha
+            // 
+            this.textBoxSenha.Location = new System.Drawing.Point(108, 121);
+            this.textBoxSenha.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxSenha.Name = "textBoxSenha";
+            this.textBoxSenha.Size = new System.Drawing.Size(377, 20);
+            this.textBoxSenha.TabIndex = 50;
+            // 
+            // labelSenha
+            // 
+            this.labelSenha.AutoSize = true;
+            this.labelSenha.Location = new System.Drawing.Point(31, 124);
+            this.labelSenha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSenha.Name = "labelSenha";
+            this.labelSenha.Size = new System.Drawing.Size(41, 13);
+            this.labelSenha.TabIndex = 49;
+            this.labelSenha.Text = "Senha:";
+            // 
             // CadastrarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(514, 192);
+            this.ClientSize = new System.Drawing.Size(514, 229);
+            this.Controls.Add(this.textBoxSenha);
+            this.Controls.Add(this.labelSenha);
             this.Controls.Add(this.btnCadastrarUsuario);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.textBoxNome);
@@ -124,5 +146,7 @@
         private System.Windows.Forms.Label labelNome;
         private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.TextBox textBoxSenha;
+        private System.Windows.Forms.Label labelSenha;
     }
 }
