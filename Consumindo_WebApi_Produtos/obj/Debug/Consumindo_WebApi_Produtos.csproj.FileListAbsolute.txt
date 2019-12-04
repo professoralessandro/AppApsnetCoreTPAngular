@@ -53,7 +53,6 @@ C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumin
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.dll
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Newtonsoft.Json.xml
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.xml
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Cadastrar.FormCadastrar.resources
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Form1.resources
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Properties.Resources.resources
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Produto.Cadastro.CadastroProduto.resources
@@ -65,3 +64,9 @@ C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumin
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.exe
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.pdb
 C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csprojAssemblyReference.cache
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\EntityFramework.dll
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Web.Providers.dll
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\EntityFramework.xml
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Web.Providers.xml
