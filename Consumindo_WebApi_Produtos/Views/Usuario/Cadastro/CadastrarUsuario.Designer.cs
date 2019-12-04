@@ -103,6 +103,7 @@
             this.textBoxSenha.Location = new System.Drawing.Point(108, 121);
             this.textBoxSenha.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSenha.Name = "textBoxSenha";
+            this.textBoxSenha.PasswordChar = '*';
             this.textBoxSenha.Size = new System.Drawing.Size(377, 20);
             this.textBoxSenha.TabIndex = 50;
             this.textBoxSenha.TextChanged += new System.EventHandler(this.textBoxSenha_TextChanged);
