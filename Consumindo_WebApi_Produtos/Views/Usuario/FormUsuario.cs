@@ -87,7 +87,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
                             {
                                 if (usuario.Nome != "")
                                 {
-                                    CadastrarUsuario cadastrarUsuario = new CadastrarUsuario(usuario.Id, usuario.Nome);
+                                    CadastrarUsuario cadastrarUsuario = new CadastrarUsuario(usuario.Id, usuario.Nome, usuario.Senha);
                                     cadastrarUsuario.Show();
                                     this.Hide();
                                 }

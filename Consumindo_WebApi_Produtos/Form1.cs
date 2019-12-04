@@ -10,6 +10,7 @@ using Consumindo_WebApi_Produtos.Common;
 using Consumindo_WebApi_Produtos.Cadastrar;
 using System.Threading.Tasks;
 using Consumindo_WebApi_Produtos.Views.Produto;
+using Consumindo_WebApi_Produtos.Views.Produto.Cadastro;
 
 namespace Consumindo_WebApi_Produtos
 {
@@ -51,11 +52,11 @@ namespace Consumindo_WebApi_Produtos
             InputBox();
 
             isNew = true;
-            
+
             if (codigoLivro != -1)
             {
                 this.GetLivroById(codigoLivro);
-                if(livro.Titulo != "" && livro.Titulo != null)
+                if (livro.Titulo != "" && livro.Titulo != null)
                 {
                     FormCadastrar formCadastrar = new FormCadastrar(livro.Id, livro.Titulo, livro.Subtitulo, livro.Autor, livro.Resumo, livro.Capa, livro.Quantidade);
                     formCadastrar.Show();
@@ -69,21 +70,54 @@ namespace Consumindo_WebApi_Produtos
 
         private void btnDeletarLivro_Click(object sender, EventArgs e)
         {
-            if(txtbNome.Text.Equals("admin") && txtbSenha.Text.Equals("admin"))
+            GetLogin();
+        }
+
+        public async void GetLogin()
+        {
+            try
             {
-                FormProduto formProduto = new FormProduto();
-                formProduto.Show();
-                this.Hide();
+                /*
+                 var serializedLivro = JsonConvert.SerializeObject(livro);
+                        var content = new StringContent(serializedLivro, Encoding.UTF8, "application/json");
+                        var result = await client.PostAsync(URI, content);
+                 */
+
+                Usuarios usuario = new Usuarios();
+                usuario.Nome = txtbNome.Text;
+                usuario.Senha = txtbSenha.Text;
+
+                var user = JsonConvert.SerializeObject(usuario);
+
+                //codigoProduto = TextBoxid
+                using (var client = new HttpClient())
+                {
+                    Boolean isAuth;
+                    BindingSource bsDados = new BindingSource();
+                    URI = "http://localhost:5000/api/login";
+                    var content = new StringContent(user, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync(URI, content);
+
+                    var status = result.StatusCode.ToString();
+
+                    if(status.Equals("OK"))
+                    {
+                        FormProduto formProduto = new FormProduto();
+                        formProduto.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Falha ao autenticar o usuário : ");
+                        return;
+                    }
+                }
+
             }
-            
-            //CODIGO ANT
-            /*
-            InputBox();
-            if (codigoLivro != -1)
+            catch (Exception ex)
             {
-                DeleteLivro(codigoLivro);
+                MessageBox.Show("Falha ao autenticar o usuário: " + ex.Message);
             }
-            */
         }
 
         private void InputBox()
@@ -183,7 +217,7 @@ namespace Consumindo_WebApi_Produtos
                         var LivroJsonString = await response.Content.ReadAsStringAsync();
                         bsDados.DataSource = JsonConvert.DeserializeObject<Livro>(LivroJsonString);
 
-                        if(isNew)
+                        if (isNew)
                         {
                             livro = JsonConvert.DeserializeObject<Livro>(LivroJsonString);
                         }
