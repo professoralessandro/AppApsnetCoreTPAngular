@@ -27,25 +27,6 @@ C:\Users\profe\source\repos\ProjetoTP\AppApsnetCoreTP - 4\Frontend-WF\Consumindo
 C:\Users\profe\source\repos\ProjetoTP\AppApsnetCoreTP - 4\Frontend-WF\Consumindo_WebApi_Produtos\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.exe
 C:\Users\profe\source\repos\ProjetoTP\AppApsnetCoreTP - 4\Frontend-WF\Consumindo_WebApi_Produtos\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.pdb
 C:\Users\profe\source\repos\ProjetoTP\AppApsnetCoreTP - 4\Frontend-WF\Consumindo_WebApi_Produtos\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Cadastrar.FormCadastrar.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Consumindo_WebApi_Produtos.exe.config
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Consumindo_WebApi_Produtos.exe
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Consumindo_WebApi_Produtos.pdb
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Newtonsoft.Json.dll
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.dll
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Newtonsoft.Json.xml
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.xml
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csprojAssemblyReference.cache
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Cadastrar.FormCadastrar.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Form1.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Properties.Resources.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Produto.Cadastro.CadastroProduto.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Produto.FormProduto.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Usuario.Cadastro.CadastrarUsuario.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Usuario.FormUsuario.resources
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csproj.GenerateResource.cache
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csproj.CopyComplete
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.exe
-C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.pdb
 C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csprojAssemblyReference.cache
 C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Cadastrar.FormCadastrar.resources
 C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Form1.resources
@@ -65,3 +46,22 @@ C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produto
 C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produtos\bin\Debug\Newtonsoft.Json.xml
 C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\profe\source\repos\ProjetoTP\Prova02\frontend\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csproj.CopyComplete
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Consumindo_WebApi_Produtos.exe.config
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Consumindo_WebApi_Produtos.exe
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Consumindo_WebApi_Produtos.pdb
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Newtonsoft.Json.dll
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\Newtonsoft.Json.xml
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Cadastrar.FormCadastrar.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Form1.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Properties.Resources.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Produto.Cadastro.CadastroProduto.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Produto.FormProduto.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Usuario.Cadastro.CadastrarUsuario.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.Views.Usuario.FormUsuario.resources
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csproj.GenerateResource.cache
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csproj.CopyComplete
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.exe
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.pdb
+C:\Users\santo\source\repos\TPFaculdade\Frontend\AppApsnetCoreTPAngular\Consumindo_WebApi_Produtos\obj\Debug\Consumindo_WebApi_Produtos.csprojAssemblyReference.cache

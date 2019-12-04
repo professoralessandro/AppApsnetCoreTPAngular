@@ -1,4 +1,5 @@
-﻿using Consumindo_WebApi_Produtos.Models;
+﻿using Consumindo_WebApi_Produtos.Common;
+using Consumindo_WebApi_Produtos.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,6 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             textBoxId.Enabled = false;
             textBoxId.Text = idUsuario.ToString();
             textBoxNome.Text = nome;
-            textBoxSenha.Text = senha;
         }
 
         static Usuarios usuario;
@@ -82,9 +82,10 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 mensagem = "";
                 string URI = "http://localhost:5000/api/usuario";
                 Usuarios usuario = new Usuarios();
+                Seguranca seguranca = new Seguranca();
                 //usuario.Id = codUsuario;
                 usuario.Nome = textBoxNome.Text;
-                usuario.Senha = textBoxSenha.Text;
+                usuario.Senha = seguranca.GerarHashMd5(textBoxSenha.Text);
                 usuario.Ativo = true;
 
                 if (!this.ValidateBook(usuario))
@@ -116,9 +117,10 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
                 mensagem = "";
                 string URI = "http://localhost:5000/api/usuario";
                 Usuarios usuario = new Usuarios();
+                Seguranca seguranca = new Seguranca();
                 usuario.Id = Convert.ToInt32(textBoxId.Text);
                 usuario.Nome = textBoxNome.Text;
-                usuario.Senha = textBoxSenha.Text;
+                usuario.Senha = seguranca.GerarHashMd5(textBoxSenha.Text);
 
                 if (!this.ValidateBook(usuario))
                 {
@@ -182,6 +184,11 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario.Cadastro
             formUsuario.Show();
             this.Close();
             this.Dispose();
+        }
+
+        private void textBoxSenha_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

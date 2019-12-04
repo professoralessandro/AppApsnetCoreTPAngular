@@ -77,6 +77,7 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
                     if (response.IsSuccessStatusCode)
                     {
                         var UsuarioJsonString = await response.Content.ReadAsStringAsync();
+                        bsDados.Clear();
                         bsDados.DataSource = JsonConvert.DeserializeObject<Usuarios>(UsuarioJsonString);
 
                         if (!isNew)
@@ -234,12 +235,17 @@ namespace Consumindo_WebApi_Produtos.Views.Usuario
         {
             FormProduto formProduto = new FormProduto();
             formProduto.Show();
-            formProduto.Hide();
+            this.Hide();
         }
 
         private void btnUsuariosPorId_Click(object sender, EventArgs e)
         {
-
+            InputBox();
+            if (codigoUsuario != -1)
+            {
+                GetUsuarioById(codigoUsuario, false);
+            }
         }
+
     }//CLASS
 }//NAMESPACE

@@ -76,6 +76,7 @@ namespace Consumindo_WebApi_Produtos.Views.Produto
                     if (response.IsSuccessStatusCode)
                     {
                         var ProdutoJsonString = await response.Content.ReadAsStringAsync();
+                        bsDados.Clear();
                         bsDados.DataSource = JsonConvert.DeserializeObject<Produtos>(ProdutoJsonString);
 
                         if (!isNew)

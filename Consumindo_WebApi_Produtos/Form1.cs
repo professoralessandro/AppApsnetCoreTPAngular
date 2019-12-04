@@ -77,15 +77,11 @@ namespace Consumindo_WebApi_Produtos
         {
             try
             {
-                /*
-                 var serializedLivro = JsonConvert.SerializeObject(livro);
-                        var content = new StringContent(serializedLivro, Encoding.UTF8, "application/json");
-                        var result = await client.PostAsync(URI, content);
-                 */
+                Seguranca seguranca = new Seguranca();
 
                 Usuarios usuario = new Usuarios();
                 usuario.Nome = txtbNome.Text;
-                usuario.Senha = txtbSenha.Text;
+                usuario.Senha = seguranca.GerarHashMd5(txtbSenha.Text);
 
                 var user = JsonConvert.SerializeObject(usuario);
 

@@ -60,6 +60,7 @@
       <DependentUpon>FormCadastrar.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Excessao.cs" />
+    <Compile Include="Common\Seguranca.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

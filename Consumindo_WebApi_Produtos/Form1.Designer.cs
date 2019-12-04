@@ -48,9 +48,9 @@
             // 
             this.btnLogar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnLogar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogar.Location = new System.Drawing.Point(205, 187);
+            this.btnLogar.Location = new System.Drawing.Point(27, 187);
             this.btnLogar.Name = "btnLogar";
-            this.btnLogar.Size = new System.Drawing.Size(457, 44);
+            this.btnLogar.Size = new System.Drawing.Size(511, 44);
             this.btnLogar.TabIndex = 4;
             this.btnLogar.Text = "Login";
             this.btnLogar.UseVisualStyleBackColor = false;
@@ -70,7 +70,7 @@
             this.txtbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbNome.Location = new System.Drawing.Point(123, 49);
             this.txtbNome.Name = "txtbNome";
-            this.txtbNome.Size = new System.Drawing.Size(665, 22);
+            this.txtbNome.Size = new System.Drawing.Size(415, 22);
             this.txtbNome.TabIndex = 14;
             // 
             // txtbSenha
@@ -78,7 +78,8 @@
             this.txtbSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbSenha.Location = new System.Drawing.Point(123, 118);
             this.txtbSenha.Name = "txtbSenha";
-            this.txtbSenha.Size = new System.Drawing.Size(665, 22);
+            this.txtbSenha.PasswordChar = '*';
+            this.txtbSenha.Size = new System.Drawing.Size(415, 22);
             this.txtbSenha.TabIndex = 15;
             // 
             // Form1
@@ -86,7 +87,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(813, 258);
+            this.ClientSize = new System.Drawing.Size(586, 258);
             this.Controls.Add(this.txtbSenha);
             this.Controls.Add(this.txtbNome);
             this.Controls.Add(this.labelSenha);

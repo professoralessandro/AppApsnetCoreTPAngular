@@ -105,6 +105,7 @@
             this.textBoxSenha.Name = "textBoxSenha";
             this.textBoxSenha.Size = new System.Drawing.Size(377, 20);
             this.textBoxSenha.TabIndex = 50;
+            this.textBoxSenha.TextChanged += new System.EventHandler(this.textBoxSenha_TextChanged);
             // 
             // labelSenha
             // 
