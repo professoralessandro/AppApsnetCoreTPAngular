@@ -33,12 +33,14 @@
             this.labelSenha = new System.Windows.Forms.Label();
             this.txtbNome = new System.Windows.Forms.TextBox();
             this.txtbSenha = new System.Windows.Forms.TextBox();
+            this.labelCreditos = new System.Windows.Forms.Label();
+            this.labelLogin = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelNome
             // 
             this.labelNome.AutoSize = true;
-            this.labelNome.Location = new System.Drawing.Point(27, 54);
+            this.labelNome.Location = new System.Drawing.Point(69, 83);
             this.labelNome.Name = "labelNome";
             this.labelNome.Size = new System.Drawing.Size(44, 13);
             this.labelNome.TabIndex = 10;
@@ -48,9 +50,9 @@
             // 
             this.btnLogar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnLogar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogar.Location = new System.Drawing.Point(27, 187);
+            this.btnLogar.Location = new System.Drawing.Point(69, 180);
             this.btnLogar.Name = "btnLogar";
-            this.btnLogar.Size = new System.Drawing.Size(511, 44);
+            this.btnLogar.Size = new System.Drawing.Size(465, 44);
             this.btnLogar.TabIndex = 4;
             this.btnLogar.Text = "Login";
             this.btnLogar.UseVisualStyleBackColor = false;
@@ -59,7 +61,7 @@
             // labelSenha
             // 
             this.labelSenha.AutoSize = true;
-            this.labelSenha.Location = new System.Drawing.Point(24, 123);
+            this.labelSenha.Location = new System.Drawing.Point(66, 138);
             this.labelSenha.Name = "labelSenha";
             this.labelSenha.Size = new System.Drawing.Size(44, 13);
             this.labelSenha.TabIndex = 12;
@@ -68,7 +70,7 @@
             // txtbNome
             // 
             this.txtbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbNome.Location = new System.Drawing.Point(123, 49);
+            this.txtbNome.Location = new System.Drawing.Point(119, 78);
             this.txtbNome.Name = "txtbNome";
             this.txtbNome.Size = new System.Drawing.Size(415, 22);
             this.txtbNome.TabIndex = 14;
@@ -76,11 +78,30 @@
             // txtbSenha
             // 
             this.txtbSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbSenha.Location = new System.Drawing.Point(123, 118);
+            this.txtbSenha.Location = new System.Drawing.Point(119, 133);
             this.txtbSenha.Name = "txtbSenha";
             this.txtbSenha.PasswordChar = '*';
             this.txtbSenha.Size = new System.Drawing.Size(415, 22);
             this.txtbSenha.TabIndex = 15;
+            // 
+            // labelCreditos
+            // 
+            this.labelCreditos.AutoSize = true;
+            this.labelCreditos.Location = new System.Drawing.Point(210, 237);
+            this.labelCreditos.Name = "labelCreditos";
+            this.labelCreditos.Size = new System.Drawing.Size(144, 13);
+            this.labelCreditos.TabIndex = 16;
+            this.labelCreditos.Text = "Creditos : Perola | Alessandro";
+            // 
+            // labelLogin
+            // 
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLogin.Location = new System.Drawing.Point(222, 19);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(120, 42);
+            this.labelLogin.TabIndex = 17;
+            this.labelLogin.Text = "Log in";
             // 
             // Form1
             // 
@@ -88,6 +109,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(586, 258);
+            this.Controls.Add(this.labelLogin);
+            this.Controls.Add(this.labelCreditos);
             this.Controls.Add(this.txtbSenha);
             this.Controls.Add(this.txtbNome);
             this.Controls.Add(this.labelSenha);
@@ -107,6 +130,8 @@
         private System.Windows.Forms.Label labelSenha;
         private System.Windows.Forms.TextBox txtbNome;
         private System.Windows.Forms.TextBox txtbSenha;
+        private System.Windows.Forms.Label labelCreditos;
+        private System.Windows.Forms.Label labelLogin;
     }
 }
 

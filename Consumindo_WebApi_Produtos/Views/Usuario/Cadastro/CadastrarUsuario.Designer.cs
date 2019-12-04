@@ -36,13 +36,14 @@
             this.labelId = new System.Windows.Forms.Label();
             this.textBoxSenha = new System.Windows.Forms.TextBox();
             this.labelSenha = new System.Windows.Forms.Label();
+            this.labelCadastroUsuario = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCadastrarUsuario
             // 
             this.btnCadastrarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnCadastrarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCadastrarUsuario.Location = new System.Drawing.Point(261, 173);
+            this.btnCadastrarUsuario.Location = new System.Drawing.Point(261, 208);
             this.btnCadastrarUsuario.Name = "btnCadastrarUsuario";
             this.btnCadastrarUsuario.Size = new System.Drawing.Size(231, 44);
             this.btnCadastrarUsuario.TabIndex = 48;
@@ -54,7 +55,7 @@
             // 
             this.btnVoltar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnVoltar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoltar.Location = new System.Drawing.Point(24, 173);
+            this.btnVoltar.Location = new System.Drawing.Point(24, 208);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(231, 44);
             this.btnVoltar.TabIndex = 47;
@@ -64,7 +65,7 @@
             // 
             // textBoxNome
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(108, 75);
+            this.textBoxNome.Location = new System.Drawing.Point(108, 110);
             this.textBoxNome.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNome.Name = "textBoxNome";
             this.textBoxNome.Size = new System.Drawing.Size(377, 20);
@@ -73,7 +74,7 @@
             // labelNome
             // 
             this.labelNome.AutoSize = true;
-            this.labelNome.Location = new System.Drawing.Point(31, 78);
+            this.labelNome.Location = new System.Drawing.Point(31, 113);
             this.labelNome.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNome.Name = "labelNome";
             this.labelNome.Size = new System.Drawing.Size(38, 13);
@@ -82,7 +83,7 @@
             // 
             // textBoxId
             // 
-            this.textBoxId.Location = new System.Drawing.Point(108, 32);
+            this.textBoxId.Location = new System.Drawing.Point(108, 67);
             this.textBoxId.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(377, 20);
@@ -91,7 +92,7 @@
             // labelId
             // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(31, 35);
+            this.labelId.Location = new System.Drawing.Point(31, 70);
             this.labelId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(21, 13);
@@ -100,7 +101,7 @@
             // 
             // textBoxSenha
             // 
-            this.textBoxSenha.Location = new System.Drawing.Point(108, 121);
+            this.textBoxSenha.Location = new System.Drawing.Point(108, 156);
             this.textBoxSenha.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSenha.Name = "textBoxSenha";
             this.textBoxSenha.PasswordChar = '*';
@@ -111,19 +112,31 @@
             // labelSenha
             // 
             this.labelSenha.AutoSize = true;
-            this.labelSenha.Location = new System.Drawing.Point(31, 124);
+            this.labelSenha.Location = new System.Drawing.Point(31, 159);
             this.labelSenha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSenha.Name = "labelSenha";
             this.labelSenha.Size = new System.Drawing.Size(41, 13);
             this.labelSenha.TabIndex = 49;
             this.labelSenha.Text = "Senha:";
             // 
+            // labelCadastroUsuario
+            // 
+            this.labelCadastroUsuario.AutoSize = true;
+            this.labelCadastroUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCadastroUsuario.Location = new System.Drawing.Point(103, 18);
+            this.labelCadastroUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCadastroUsuario.Name = "labelCadastroUsuario";
+            this.labelCadastroUsuario.Size = new System.Drawing.Size(252, 29);
+            this.labelCadastroUsuario.TabIndex = 51;
+            this.labelCadastroUsuario.Text = "Cadastro de Usuário";
+            // 
             // CadastrarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(514, 229);
+            this.ClientSize = new System.Drawing.Size(514, 269);
+            this.Controls.Add(this.labelCadastroUsuario);
             this.Controls.Add(this.textBoxSenha);
             this.Controls.Add(this.labelSenha);
             this.Controls.Add(this.btnCadastrarUsuario);
@@ -150,5 +163,6 @@
         private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.TextBox textBoxSenha;
         private System.Windows.Forms.Label labelSenha;
+        private System.Windows.Forms.Label labelCadastroUsuario;
     }
 }

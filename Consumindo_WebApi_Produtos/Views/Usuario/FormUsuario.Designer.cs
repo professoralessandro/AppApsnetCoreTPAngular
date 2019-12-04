@@ -36,6 +36,7 @@
             this.btnUsuariosPorId = new System.Windows.Forms.Button();
             this.btnObterUsuarios = new System.Windows.Forms.Button();
             this.btnNavegarProduto = new System.Windows.Forms.Button();
+            this.labelCadastroUsuario = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,12 +131,24 @@
             this.btnNavegarProduto.UseVisualStyleBackColor = false;
             this.btnNavegarProduto.Click += new System.EventHandler(this.btnNavegarProduto_Click);
             // 
+            // labelCadastroUsuario
+            // 
+            this.labelCadastroUsuario.AutoSize = true;
+            this.labelCadastroUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCadastroUsuario.Location = new System.Drawing.Point(212, 11);
+            this.labelCadastroUsuario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCadastroUsuario.Name = "labelCadastroUsuario";
+            this.labelCadastroUsuario.Size = new System.Drawing.Size(116, 29);
+            this.labelCadastroUsuario.TabIndex = 52;
+            this.labelCadastroUsuario.Text = "Usuários";
+            // 
             // FormUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(783, 448);
+            this.Controls.Add(this.labelCadastroUsuario);
             this.Controls.Add(this.btnNavegarProduto);
             this.Controls.Add(this.txtURI);
             this.Controls.Add(this.dgvDados);
@@ -163,5 +176,6 @@
         private System.Windows.Forms.Button btnUsuariosPorId;
         private System.Windows.Forms.Button btnObterUsuarios;
         private System.Windows.Forms.Button btnNavegarProduto;
+        private System.Windows.Forms.Label labelCadastroUsuario;
     }
 }
