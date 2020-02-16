@@ -2,13 +2,13 @@ export const environment = {
   production: false,
 
   // *DESENVOLVIMENTO*
-  api_url: "http://localhost:5000",
+  api_url: "http://localhost:6010",
   upload_service: "",
   email_service: "",
   quiosque_url: "",
-  beneficiarios_url: "http://localhost:5000",
-  visitantes_url: "http://localhost:5000",
-  workflow_url: "http://localhost:5000",
+  beneficiarios_url: "http://localhost:6010",
+  visitantes_url: "http://localhost:6010",
+  workflow_url: "http://localhost:6010",
 
   //*HOMOLOGAÇÃO*
   // api_url: "http://ts.annexus.com.br:8085/micro-cadastro/",
