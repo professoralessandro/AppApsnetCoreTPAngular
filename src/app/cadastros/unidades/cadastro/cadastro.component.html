@@ -1,0 +1,140 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Porto</li>
+        <li>{{this.title}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+
+  <div *ngIf="this.error" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-danger">
+      <table align="center">
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div *ngIf="this.sucess" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+      <table align="center">
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CONTEUDO DO CONTAINER -->
+  <div title="container" *ngIf="this.isContainer">
+    <div class="col-md-12 search-add">
+      <button ID="btnVoltar" Class="btn btn-primary pull-left" [routerLink]="['/cadastros/porto']">Voltar para
+        busca</button>
+
+      <button style="margin-left: 5px" ID="btnCadastrar" Class="btn btn-primary pull-left" (click)="novoContainer()"
+        *ngIf="!this.isNew">
+        Novo</button>
+
+      <button style="margin-left: 5px" ID="btnSalvar" (click)="cadastrarContainer()"
+        Class="btn btn-primary pull-left">Salvar</button>
+      <br>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <!-- <form #g="ngForm" autocomplete="off" (ngSubmit)="onSubmit(g)"> -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Numero:</h5>
+          <input required type="text" maxlength="50" [(ngModel)]="container.numero" ID="txtDescricao" name="numero"
+            mask="000000000000000" class="form-control" placeholder="Numero do container">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Tipo:</h5>
+          <input required type="text" maxlength="50" [(ngModel)]="container.tipo" ID="txtDescricao" name="tipo" maxlength="50"
+            class="form-control" placeholder="Tipo">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Tamanho:</h5>
+          <input required type="text" maxlength="50" [(ngModel)]="container.tamanho" ID="txtDescricao" name="descricao"
+            class="form-control" placeholder="Tamanho">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>BL:</h5>
+          <select required Class="form-control" [(ngModel)]="container.blId" ID="txtSede" name="ativo">
+            <!-- <option *ngIf="container.blId === undefined || container.blId === mull" value="{{item.blId}}">Selecione...</option> -->
+            <option *ngFor="let item of this.lstBls" [value]="item.blId">{{item.numero}} - {{item.consignee}}</option>
+          </select>
+        </div>
+      </div>
+    <!-- </form> -->
+  </div>
+  <div title="container" *ngIf="!this.isContainer">
+    <div class="col-md-12 search-add">
+      <button ID="btnVoltar" Class="btn btn-primary pull-left" [routerLink]="['/cadastros/porto']">Voltar para
+        busca</button>
+
+      <button style="margin-left: 5px" ID="btnCadastrar" Class="btn btn-primary pull-left" (click)="novoBl()"
+        *ngIf="!this.isNew">
+        Novo</button>
+
+      <button style="margin-left: 5px" ID="btnSalvar" (click)="cadastrarBl()"
+        Class="btn btn-primary pull-left">Salvar</button>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <!-- <form #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)"> -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Numero:</h5>
+          <input required type="text" maxlength="50" [(ngModel)]="bl.numero" ID="txtDescricao" name="numero"
+            mask="000000000000000" class="form-control" placeholder="Numero do bl">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Consignatário:</h5>
+          <input required type="text" maxlength="50" [(ngModel)]="bl.consignee" ID="txtDescricao" name="tipo" maxlength="50"
+            class="form-control" placeholder="Consignatário">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Navio:</h5>
+          <input required type="text" maxlength="50" [(ngModel)]="bl.navio" ID="txtDescricao" name="descricao"
+            class="form-control" placeholder="Navio">
+        </div>
+      </div>
+    <!-- </form> -->
+  </div>
+</div>

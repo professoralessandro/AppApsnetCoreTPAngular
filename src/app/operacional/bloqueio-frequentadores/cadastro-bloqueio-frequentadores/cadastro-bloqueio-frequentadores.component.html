@@ -1,0 +1,124 @@
+<div class="breadcrumbs">
+    <div class="breadcumb">
+        <div class="col-md-12">
+            <ul>
+                <li>Cadastros</li>
+                <li>Cadastro de Visitantes</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div *ngIf="this.error" align="center">
+    <br>
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+        <table>
+            <tr>
+                <td><img src="/assets/imagens/exclamation.png" /></td>
+                <td>
+                    <h6 style="white-space:  pre;"><b>{{this.mensagem}}</b></h6>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="this.success" align="center">
+    <br>
+    <div style="width:400px;margin-top:10px" class="alert alert-success">
+        <table>
+            <tr>
+                <td><img src="/assets/imagens/success.png" /></td>
+                <td>
+                    <h6 style="white-space:  pre;"><b>{{this.mensagem}}</b></h6>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div align="center">
+    <div class="container content">
+        <div col-lg-8>
+            <div class="col-md-12 search-add">
+                <button ID="btnVoltar" Class="btn btn-primary pull-left" [routerLink]="['../../../../buscar']">Voltar
+                    para a
+                    busca</button>
+
+                <button ID="btnSalvar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
+                    (click)="cadastrarBloqueio()">Salvar</button>
+            </div>
+            <br>
+            <hr>
+            <br>
+
+            <div class="col-lg-10 col-md-4 col-xs-12">
+
+                <div class="col-lg-10 col-md-4 col-xs-12">
+                    <h5 style="text-align: left">Nome do Frequentador:</h5>
+                    <input [(ngModel)]="frequentadores.nome" disabled="" type="text" maxlength="80" class="form-control"
+                        id="bloqueioNome" placeholder="Nome">
+                </div>
+
+                <div class="col-lg-5 col-md-4 col-xs-12">
+                    <h5 style="text-align: left">CPF:</h5>
+                    <input [(ngModel)]="frequentadores.cpf" disabled="" (keyup)="cpfcnpjmask()"
+                        (keydown)="cpfcnpjmask()" maxlength="25" type="text" mask="000.000.000-00" type="text"
+                        class="form-control" id="BloqueioCPF" placeholder="CPF">
+                </div>
+
+                <div class="col-lg-5 col-md-4 col-xs-12">
+                    <h5 style="text-align: left">Tipo de Frequentador:</h5>
+                    <input disabled="" [(ngModel)]="frequentadores.tipoPessoa" value="Visitante" maxlength="25"
+                        type="text" type="text" class="form-control" id="BloqueioCPF" placeholder="Tipo Frequentador">
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                    <h5 style="text-align: left">Bloqueado de:</h5>
+                    <div class="input-group">
+
+                        <input type='text' name="inicio"
+                            [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9' }"
+                            ID="txtDataEnvioInicio"
+                            (dateChanged)="bloqueioFrequentadores.dataInicio = ($event.jsdate != null ? $event.jsdate.toISOString() : '')"
+                            #di="ngx-mydatepicker" placeholder="DD/MM/YYYY" ngx-mydatepicker #inicio="ngModel"
+                            [(ngModel)]="dtInicio" class="form-control" [options]="{dateFormat: 'dd/mm/yyyy'}">
+                        <span class="input-group-btn">
+                            <input type="image" novalidate class="btn btn-default-calendar"
+                                (click)="di.toggleCalendar()" src="assets/imagens/calendar.png">
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                    <h5 style="text-align: left">Bloqueado até:</h5>
+                    <div class="input-group">
+
+                        <input type='text' name="fim"
+                            [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9' }"
+                            ID="txtDataEnvioFim"
+                            (dateChanged)="bloqueioFrequentadores.dataFim = ($event.jsdate != null ? $event.jsdate.toISOString() : '')"
+                            #df="ngx-mydatepicker" placeholder="DD/MM/YYYY" ngx-mydatepicker #fim="ngModel"
+                            [(ngModel)]="dtFim" class="form-control" [options]="{dateFormat: 'dd/mm/yyyy'}">
+                        <span class="input-group-btn">
+                            <input type="image" novalidate class="btn btn-default-calendar"
+                                (click)="df.toggleCalendar()" src="assets/imagens/calendar.png">
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-xs-12">
+                    <input [(ngModel)]="bloqueioFrequentadores.ativo" type="checkbox" class="custom-control-input"
+                        id="ativo2" style="margin:0px">
+                    <label class="custom-control-label" for="ativo2"
+                        style="margin:0px; margin-left: 8px; font-weight: bold">Ativo</label>
+                </div>
+
+            </div>
+            <div class="col-md-12 mb-12">
+                <br>
+                <h5 style="text-align: left">Justificativa de Bloqueio:</h5>
+                <textarea rows="10" [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9' }"
+                    [(ngModel)]="bloqueioFrequentadores.descricao" type="text" class="form-control" id="justifica"
+                    placeholder="Justificativa de Bloqueio"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

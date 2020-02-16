@@ -1,0 +1,96 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Busca de Visitantes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+
+  <div *ngIf="required" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>Não há registros para o critério de busca informado!</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar</button>
+    <button ID="btnCadastrar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
+      [routerLink]="['cadastro']"> Cadastrar Novo Visitante</button>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Código:</h5>
+      <input (keyup)="Mascara()" (keydown)="Mascara()" maxlength="8" type="text" [(ngModel)]="visitante.visitanteId"
+        ID="txtCodigo" name="codigo" mask="000000" class="form-control" placeholder="Codigo do Visitante">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Nome:</h5>
+      <input type="text" maxlength="50" [(ngModel)]="visitante.nome" ID="txtNome" name="nome" class="form-control"
+        placeholder="Nome">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>CPF:</h5>
+      <input (keyup)="cpfcnpjmask()" (keydown)="cpfcnpjmask()" maxlength="25" type="text" mask="000.000.000-00"
+        placeholder="CPF" [(ngModel)]="visitante.cpf" ID="txtCpf" name="cpf" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Ativo:</h5>
+      <select Class="form-control" [(ngModel)]="visitante.ativo" name="ativo">
+        <option value="true">Ativo</option>
+        <option value="">Todos</option>
+        <option value="false">Inativo</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <table *ngIf="this.listaVisitantes.length > 0" class=" table list-users" cellspacing="0"
+    id="ContentPlaceHolder1_grdBusca" style="border-collapse:collapse;">
+    <tbody>
+      <tr style="color:#000;">
+        <th class="th-lg"><a style="color:#000;">Nome</a></th>
+        <th class="th-lg"><a style="color:#000;">CPF</a></th>
+        <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+        <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+      </tr>
+
+      <tr
+        *ngFor="let item of this.listaVisitantes | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+        <td>{{item.nome}}</td>
+        <td>{{item.cpf}}</td>
+        <td><a [routerLink]="['editar',item.visitanteId]" class="glyphicon glyphicon-pencil"
+            style="cursor: pointer"></a>
+        </td>
+        <td><a [routerLink]="['deletar',item.visitanteId]" class="glyphicon glyphicon-remove"
+            style="color:red; cursor: pointer"></a></td>
+      </tr>
+
+    </tbody>
+    <pagination-controls *ngIf="this.listaVisitantes.length > 9" (pageChange)="paginaAtual = $event">
+    </pagination-controls>
+  </table>
+</div>

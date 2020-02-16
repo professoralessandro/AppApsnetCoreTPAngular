@@ -1,0 +1,135 @@
+<div class="modal-content">
+
+  <div class="modal-header">
+    <h5 class="modal-title">{{titulo}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <!-- <p>{{mensagem}}</p> -->
+
+    <div style="text-align: center">
+      <p>Selecione a forma de Pagamento :</p>
+    </div>
+
+    <div style="text-align: center">
+      <!-- INICIO SHOPLINE -->
+      <div class="row" *ngIf="boxCredito == false">
+        <button type="button" class="btn-tipo" (click)="OpenShopline()">Shopline</button>
+      </div>
+      <!-- 
+      <div class="row" style="background-color: bisque; padding: 10px;" *ngIf="boxShopline == true">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Banco:</h5>
+          <input name="codigo" mask="0000" class="form-control" placeholder="Banco">
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Agência:</h5>
+          <input name="codigo" mask="" class="form-control" placeholder="Agência">
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Conta Corrente:</h5>
+          <input maxlength="8" name="codigo" mask="00000" class="form-control" placeholder="Conta Corrente">
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <h5>Dígito CC:</h5>
+          <input maxlength="8" name="codigo" mask="00000" class="form-control" placeholder="Dígito CC">
+        </div>
+      </div> -->
+      <div class="row" *ngIf="boxShopline == true">
+        <div class="cartao-debito">
+
+          <div class="logo-cartao">
+            <br />
+            <img src="../../../../assets/imagens/logo-itau.png">
+          </div>
+
+          <div class="footer-cartao">
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: left">
+                <h5>Banco:</h5>
+                <input name="codigo" mask="0000" class="form-control" placeholder="0000">
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="text-align: left">
+                <h5>Agência:</h5>
+                <input name="codigo" mask="0000" class="form-control" placeholder="0000">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="text-align: left">
+                <h5>Conta Corrente:</h5>
+                <input class="form-control" placeholder="00000">
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="text-align: left">
+                <h5>Dígito:</h5>
+                <input name="codigo" mask="0" class="form-control" placeholder="0">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- FIM SHOPLINE -->
+
+      <!-- INICIO CRÉDITO -->
+      <div class="row" *ngIf="boxShopline == false">
+        <button type="button" class="btn-tipo" (click)="OpenCredito()">Crédito</button>
+      </div>
+
+      <div class="row" *ngIf="boxCredito == true">
+        <div class="cartao">
+
+          <div class="logo-cartao">
+            <br />
+            <img src="../../../../assets/imagens/logo-itau.png">
+          </div>
+
+          <div class="footer-cartao">
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="text-align: left">
+                <h5>Número do cartão:</h5>
+                <input name="codigo" mask="0000 0000 0000 0000" class="form-control" placeholder="0000 0000 0000 0000">
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="text-align: left">
+                <h5>CVV:</h5>
+                <input name="codigo" mask="000" class="form-control" placeholder="000">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="text-align: left">
+                <h5>Nome:</h5>
+                <input class="form-control" placeholder="Dígite o nome do títular">
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="text-align: left">
+                <h5>Validade:</h5>
+                <input name="codigo" mask="00/00" class="form-control" placeholder="00/00">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- FIM CRÉDITO -->
+
+    </div>
+    <br />
+
+
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary">Salvar</button>
+      <button type="button" class="btn btn-primary" style="background-color: rgba(250, 128, 128, 0.856) !important"
+        (click)="fecharModal()">Fechar</button>
+    </div>
+
+  </div>

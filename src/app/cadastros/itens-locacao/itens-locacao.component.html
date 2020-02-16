@@ -1,0 +1,117 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastro</li>
+        <li>Categoria de Itens Locação</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+
+  <div *ngIf="required" align="center">
+    <div style="width:475px;margin-top:10px" class="alert alert-success">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space: pre;"><b>Não há registros para o critério de busca informado!</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="col-md-12 search-add">
+    <button ID="btnBuscar" (click)="buscar()" Class="btn btn-primary pull-left">Buscar</button>
+    <button ID="btnCadastrar" *ngIf="permissions.btnCadastrar" Class="btn btn-primary pull-left"
+      [routerLink]="['cadastro']"> Cadastrar</button>
+  </div>
+
+  <br>
+  <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Código:</h5>
+      <input type="text" mask="00000000" [(ngModel)]="feed.itensLocacaoTabelaId" ID="txtTitulo" name="titulo"
+        class="form-control" placeholder="Código">
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Descrição:</h5>
+      <input type="text" [(ngModel)]="feed.descricao" ID="txtTitulo" name="titulo" class="form-control"
+        placeholder="Descrição">
+    </div>
+  </div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+  </ngx-loading>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Tipo Item:</h5>
+      <select Class="form-control" [(ngModel)]="feed.tipoItemId" name="tipoItens">
+        <option value="undefined">Selecione...</option>
+        <option *ngFor="let item of this.tipoItens" [value]="item.tipoItemId">{{item.descricao}}</option>
+      </select>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Unidades:</h5>
+      <select Class="form-control" [(ngModel)]="feed.sedeId" name="sedeId">
+        <option value="0">Selecione...</option>
+        <option *ngFor="let item of this.sedes" [value]="item.sedeId">{{item.titulo}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Ativo:</h5>
+      <select Class="form-control" [(ngModel)]="feed.ativo" name="ativo">
+        <option value="true">Ativo</option>
+        <option value="">Todos</option>
+        <option value="false">Inativo</option>
+      </select>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <table *ngIf="this.listaFeeds.length > 0" class="table list-users" cellspacing="0"
+        style="border-collapse:collapse;">
+        <thead>
+          <tr style="color:#002678;">
+            <th class="th-lg"><a style="color:#002678;">Códigio</a></th>
+            <th class="th-lg"><a style="color:#002678;">Descrição</a></th>
+            <th class="th-lg"><a style="color:#002678;">Sede</a></th>
+            <th class="th-lg"><a style="color:#002678;">Tipo Item</a></th>
+            <th class="th-lg border-top-0" scope="col" abbr="Editar" style="width:5px;"></th>
+            <th class="th-lg border-top-0" scope="col" abbr="Excluir" style="width:5px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of this.listaFeeds | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+            <td>{{item.itensLocacaoTabelaId}}</td>
+            <td>{{item.descricao}}</td>
+            <td>{{item.nomeSede}}</td>
+            <td>{{item.nomeItensLocacaoTabelas}}</td>
+            <td><a [routerLink]="['cadastro',item.itensLocacaoTabelaId]" class="glyphicon glyphicon-pencil"
+                style="cursor: pointer"></a>
+            </td>
+            <td><a [routerLink]="['deletar',item.itensLocacaoTabelaId]" class="glyphicon glyphicon-remove"
+                style="color:red; cursor: pointer"></a></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <pagination-controls *ngIf="this.listaFeeds.length > 0" responsive="true" class="my-pagination" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+      
+    </div>
+  </div>
+
+</div>

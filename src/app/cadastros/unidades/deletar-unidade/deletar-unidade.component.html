@@ -1,0 +1,55 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Deletar {{this.title}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- AREA DELETAR CONTAINER -->
+<div title="Container">
+  <div *ngIf="isContainer" class="container">
+    <br />
+    <table align="center">
+      <div style="width:400px;margin-top:10px" class="alert alert-success">
+        <tr>
+            <td><img src="/assets/imagens/question.png" /></td><blockquote></blockquote>
+            <td><h6 style="white-space:  pre;"><b>Deseja realmente deletar o {{this.title}} <br>{{ message }} permanentemente?</b></h6></td>
+        </tr>
+      </div>
+    </table>
+      <br />
+      <table align="center">
+        <tr>
+          <td><button ID="btnNovo" Class="btn btn-primary" (click)="deletarContainer()">Sim</button></td>
+          <td><button ID="btnNovo" Class="btn btn-primary" [routerLink]="['/cadastros/porto']">Não</button></td>
+        </tr>
+      </table>
+      <hr>
+  </div>
+</div>
+<!-- AREA DELETAR BL -->
+<div title="BL">
+  <div *ngIf="!isContainer" class="container">
+    <br />
+    <table align="center">
+      <div style="width:400px;margin-top:10px" class="alert alert-success">
+        <tr>
+            <td><img src="/assets/imagens/question.png" /></td><blockquote></blockquote>
+            <td><h6 style="white-space:  pre;"><b>Deseja realmente deletar o {{this.title}} <br>{{ message }} permanentemente?</b></h6></td>
+        </tr>
+      </div>
+    </table>
+      <br />
+      <table align="center">
+        <tr>
+          <td><button ID="btnNovo" Class="btn btn-primary" (click)="deletarBl()">Sim</button></td>
+          <td><button ID="btnNovo" Class="btn btn-primary" [routerLink]="['/cadastros/porto']">Não</button></td>
+        </tr>
+      </table>
+      <hr>
+  </div>
+</div>

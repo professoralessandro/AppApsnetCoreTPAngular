@@ -1,0 +1,117 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Cadastro de Formas de Pagamento</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container content">
+
+  <div *ngIf="this.error" align="center">
+    <div style="width:400px;margin-top:10px" class="alert alert-success" align="center">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/exclamation.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="this.success" align="center" class="alert alert-success">
+    <div style="width:400px;margin-top:10px">
+      <table>
+        <tr>
+          <td><img src="/assets/imagens/success.png" /></td>
+          <td>
+            <h6 style="white-space:  pre;"><b>{{mensagem}}</b></h6>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <form name="form" (ngSubmit)="f.form.valid" #f="ngForm">
+    <div _ngcontent-c5="" class="col-md-12 search-add">
+      <button _ngcontent-c5="" class="btn btn-primary pull-left" id="btnVoltar" tabindex="0"
+        [routerLink]="['/cadastros/adm-formas-pagamento']">
+        Voltar para busca
+      </button>
+
+      <button ID="btnNovo" Class="btn btn-primary pull-left"
+        [routerLink]="['/cadastros/adm-formas-pagamento/cadastro']">Novo</button>
+
+      <button [disabled]="!f.form.valid" (click)="salvar()" class="btn btn-primary pull-left"
+        id="btnSalvar">Salvar</button>
+    </div>
+
+    <br> <br>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5 *ngIf="isNew == false">Código:</h5>
+            <input *ngIf="isNew == false" maxlength="10" (keyup)="Mascara()" disabled type="text" ID="formaPagamentoId"
+              [(ngModel)]="bloqueioQuiosque.formaPagamentoId" name="formaPagamentoId" class="form-control"
+              placeholder="Código" required #formaPagamentoId="ngModel">
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5>Chave:</h5>
+            <input type="text" disabled [(ngModel)]="bloqueioQuiosque.chave" ID="chave" name="chave"
+              class="form-control" placeholder="Chave" #chave="ngModel">
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h5>Descrição:</h5>
+            <input type="text" [(ngModel)]="bloqueioQuiosque.descricao" ID="descricao" name="descricao"
+              class="form-control" placeholder="descricao" required #descricao="ngModel">
+
+            <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" style="color:red;">
+              <li *ngIf="descricao.errors.required">
+                Descrição é um campo obrigatório.
+              </li>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5>Exibir na Portaria:</h5>
+            <input type="checkbox" [(ngModel)]="bloqueioQuiosque.exibirPortaria" name="exibirPortaria">
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5>Exibir nas Reservas:</h5>
+            <input type="checkbox" [(ngModel)]="bloqueioQuiosque.exibirReservas" name="exibirReservas">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5>Permite Parcelar:</h5>
+            <input type="checkbox" [(ngModel)]="bloqueioQuiosque.permiteParcelar" name="permiteParcelar">
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h5>Ativo:</h5>
+            <input type="checkbox" [(ngModel)]="bloqueioQuiosque.ativo" name="ativo">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </form>

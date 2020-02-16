@@ -1,0 +1,220 @@
+
+<div class="container content">
+
+  <form [formGroup]="edithForm" (ngSubmit)="onSubmit()">
+      <div class="filters">
+          <div class="col-md-12 search-add">
+              <input type="button" (click)="GoList()" value="Voltar p/ beneficiário titular " id="btnBusca" class="btn btn-primary pull-left" >                
+              <input type="submit" value="Salvar" id="btnNew" class="btn btn-primary pull-left" [disabled]="loading" >                                            
+          </div>
+
+      </div>
+
+      <div class="formContent">
+
+          <div>
+
+              <div class="row">
+                  <div class="col-md-8 order-md-1">
+                      <div style="width:100%;margin-top:10px; margin-bottom: 15px" class="alert alert-success" *ngIf="mensagem">
+                          <table>
+                              <tr>
+                                  <td><img src="/assets/imagens/exclamation.png" /></td>
+                                  <td style="padding-left: 18px">
+                                      <h6 style="white-space: pre; font-size: 1.3em"><b>{{mensagem}}</b></h6>
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+
+                      <h4 class="mb-3"><b>{{titulo}}</b></h4>
+
+                      <div class="row" style="border: 4px double #e2cbb0; background-color: bisque; padding: 10px; border-radius: 4px;" *ngIf="boxBloqueio==true && editMode==true">
+                          <div class="col-md-3 mb-3">
+                              <label for="bloqueadode">Bloqueado de:</label>
+                              <input value="bloqueioDe" type="date" class="form-control" id="bloqueadode" placeholder="Início de bloqueio">
+                          </div>
+
+                          <div class="col-md-3 mb-3">
+                              <label for="bloqueadoate">Bloqueado até:</label>
+                              <input type="date" value="bloqueioAte" class="form-control" id="bloqueadoate" placeholder="fim de bloqueio">
+                          </div>
+
+                          <div class="col-md-3 mb-3 custom-control custom-checkbox" style="margin-bottom: 10px; margin-top:10px">
+                              <input type="checkbox" class="custom-control-input" id="ativo2" formControlName="ativo" style="margin:0px">
+                              <label class="custom-control-label" for="ativo2" style="margin:0px; margin-left: 8px; font-weight: bold">Ativo</label>
+                          </div>
+
+                          <div class="col-md-12 mb-12">
+                              <label for="justifica">Justificativa de Bloqueio:
+                                  <br>
+                              </label>
+                              <textarea type="text" class="form-control" id="justifica" placeholder="Justificativa de Bloqueio"></textarea>
+                          </div>
+
+                      </div>
+
+                      <div class="row" *ngIf="editMode">
+                          <div class="col-md-6 mb-3">
+                              <label for="codigo">Código:</label>
+                              <input formControlName="associadoId" type="text" class="form-control" id="codigo" disabled placeholder="" value="">
+
+                          </div>
+                         
+                      </div>
+
+                      <div class="row" *ngIf="1==2">
+                          <div class="col-md-6 mb-3">
+                              <label for="aprovou">Aprovado por:</label>
+                              <input formControlName="statusAprovacaoId" type="text" class="form-control" id="aprovou" placeholder="Usuário que aprovou o cadastro" value="" disabled>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                              <label for="inativacao">Data de Inativação:</label>
+                              <input type="text" class="form-control" id="inativacao" value="" disabled>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-12 mb-3">
+                              <label for="nome" contenteditable="true">Nome:</label>
+                              <input formControlName="nome" type="text" class="form-control" id="nome" placeholder="" value="" required="">
+                              <div *ngIf="submitted && f.nome.errors">
+                                  <div *ngIf="f.nome.errors.required">Este campo é obrigatório</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-12 mb-3">
+                              <label for="cpf">CPF:</label>
+                              <input formControlName="cpf" type="text" class="form-control" id="cpf" placeholder="" value="" required="" mask="000.000.000-00">
+                              <div *ngIf="submitted && f.cpf.errors">
+                                  <div *ngIf="f.cpf.errors.required">Este campo é obrigatório</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6 mb-3">
+                              <label for="email">Email</label>
+                              <input formControlName="email" type="email" class="form-control" id="email" placeholder="seu@email.com">
+                              <div *ngIf="submitted && f.email.errors">
+                                  <div *ngIf="f.email.errors">Digite um e-mail válido</div>
+                              </div>
+                          </div>
+
+                          <div class="col-md-6 mb-3">
+                                <label for="dana_nascimento">Data de Nascimento:</label>
+                                <input formControlName="dataNascimento" type="date" class="form-control" id="dana_nascimento" placeholder="" value="">
+                                <div *ngIf="submitted && f.dataNascimento.errors">
+                                    <div *ngIf="f.dataNascimento.errors.required">Este campo é obrigatório</div>
+                                </div>
+                            </div>
+
+                      </div>
+                      <div class="row">
+                            <div class="col-md-6 mb-3">
+                                    <label for="sexo" contenteditable="true">Sexo:</label>
+                                    <select formControlName="sexo" class="form-control" id="sexo" placeholder="Selecione o sexo" (change)="SexoChange()">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Feminino</option>
+                                    </select>
+                                    
+                                </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="telefone">Telefone:</label>
+                            <input mask="(00)00000-0000" formControlName="telefone" type="text" class="form-control" id="telefone" placeholder="" value="">
+                            <div *ngIf="submitted && f.telefone.errors">
+                                <div >Informe o telefone corretamente.</div>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+
+                    <div class="row">
+                            <div class="col-md-6 mb-3">
+                                    <label for="grau" contenteditable="true">Grau de Parentesco:</label>
+                                    <select  class="form-control" id="grau" placeholder="Grau de parentesco" >
+                                        <option value="C">Cônjuge (Esposa/Esposo)</option>
+                                        <option value="F">Filho/Filha</option>
+                                    </select>                                    
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                        <label for="data_inativacao">Data de Inativação:</label>
+                                        <input  type="text" class="form-control" id="data_inativacao" placeholder="" value="" disabled>
+                                       
+                                    </div>
+                       
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12 mb-12">
+                                    <label for="justifica">Justificativa de Bloqueio:
+                                        <br>
+                                    </label>
+                                    <textarea type="text"  class="form-control" id="justifica" placeholder="Justificativa de Bloqueio"></textarea>
+                                </div>
+                    </div>
+
+                 
+                      
+                   
+
+                  </div>
+
+                  <div class="col-md-4 order-md-2">
+
+                      <!-- <h4 class="d-flex justify-content-between mb-3"> <span class="text-muted">Avatar</span> </h4> -->
+                      <img  *ngIf="sexofm=='M'" class="img-fluid d-block img-thumbnail" style="width: 100%;vertical-align: middle;" [src]="imgURL" onerror="this.src='../../../../../assets/imagens/silhuetamasculina.png'">
+                      <img  *ngIf="sexofm=='F'" class="img-fluid d-block img-thumbnail" style="width: 100%;vertical-align: middle;" [src]="imgURL" onerror="this.src='../../../../../assets/imagens/silhuetafeminina.gif'">
+                      
+
+                      <div class="p-2 my-4" style="margin-top: 10px; margin-bottom:10px; padding-left: 27px">
+                          <div class="input-group">
+                              <div class="input-group-append">
+                                  <input type="file" id="fileAvatar" style="display: none" #file accept='image/*' (change)="preview(file.files)">
+                                  <input type="button" (click)="OpenFile()" value="Alterar Imagem" id="btnAvatar" class="btn btn-secondary pull-left" style="width:100%">
+                              </div>
+                          </div>
+                      </div>
+
+                      <ul class="list-group">
+                          <li class="list-group-item d-flex justify-content-between">
+                              <div>
+                                
+                                  <hr class="mb-4">
+                                  <div class="custom-control custom-checkbox" style="margin-bottom: 10px">
+                                      <input type="checkbox" class="custom-control-input" id="ativo" formControlName="ativo" style="margin:0px">
+                                      <label class="custom-control-label" for="ativo" style="margin:0px; margin-left: 8px; font-weight: bold">Ativo</label>
+                                  </div>
+
+                                  <div class="custom-control custom-checkbox" style="margin-bottom: 10px">                
+              <input type="checkbox" class="custom-control-input" id="bloqueado" style="margin:0px" formControlName="bloqueado" > <label
+                class="custom-control-label" for="bloqueado"  style="margin:0px; margin-left: 8px; font-weight: bold"  >Bloqueado</label> </div> 
+
+                                
+
+                                  <div class="custom-control custom-checkbox" style="margin-bottom: 10px">
+                                      <input type="checkbox" class="custom-control-input" id="receberprog" style="margin:0px" formControlName="permiteEmailComunicacoes">
+                                      <label class="custom-control-label" for="receberprog" style="margin:0px; margin-left: 8px; font-weight: bold">Permite receber programação por e-mail
+                                      </label>
+                                  </div>
+
+                                  <hr class="mb-4">
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+
+              </div>
+          </div>
+
+          <hr clas="mb-12">
+
+     
+
+          
+      </div>
+  </form>
+</div>
+

@@ -1,0 +1,137 @@
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <ul>
+        <li>Cadastros</li>
+        <li>Cadastro de Local de Reserva</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container content">
+    <div *ngIf="required" align="center">
+        <div style="width:400px;margin-top:10px" class="alert alert-success">
+          <table>
+            <tr>
+              <td><img src="/assets/imagens/exclamation.png" /></td>
+              <td><h6 style="white-space: pre;"><b>{{mensagem}}</b></h6></td>
+            </tr>
+          </table>  
+        </div>          
+    </div>
+    <div *ngIf="success" align="center">
+      <div style="width:400px;margin-top:10px" class="alert alert-success">
+          <table>
+              <tr>
+                <td><img src="/assets/imagens/success.png" /></td>
+                <td><h6 style="white-space: pre;"><b>{{mensagem}}</b></h6></td>
+              </tr>
+            </table>  
+      </div>     
+    </div>
+    <div *ngIf="erro" align="center">
+        <div style="width:800px;margin-top:10px" class="alert alert-success">
+            <table>
+                <tr>
+                  <td><img style="width:42px" src="/assets/imagens/exclamation.png" /></td>
+                  <td><h6 style="white-space: pre;"><b>{{mensagem}}</b></h6></td>
+                </tr>
+              </table>  
+        </div>     
+    </div>
+
+  <div class="col-md-12 search-add">
+    <button ID="btnVoltar" Class="btn btn-primary pull-left" [routerLink]="['/cadastros/locais-reserva']">Voltar para
+      busca</button>
+    <button ID="btnNovo" Class="btn btn-primary pull-left" [routerLink]="['/cadastros/locais-reserva/cadastro']">Novo</button>
+    <button ID="btnSalvar" (click)="cadastrarLocalReserva()" Class="btn btn-primary pull-left">Salvar</button>
+  </div>
+
+  <br>
+  <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+        <h5>Código:</h5>
+        <input style="width: 75px" readonly type="text" [(ngModel)]="locaisReserva.localReservaId" ID="txtTitulo" name="titulo" class="form-control"
+          placeholder="Código">
+          
+          
+      <h5>Categoria:</h5>
+      <select [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9', 'width' : '555px' }" id="localReservaCategoria" Class="form-control" name="ativo" [(ngModel)]="selected">
+        <option *ngFor="let item of this.categorias" 
+        [value]="item.localReservaCategoriaId" 
+         >{{item.titulo}}</option>
+      </select>
+      <!-- [selected]="(item.localReservaCategoriaId == this.selected)" -->
+    </div>
+  </div>
+
+  <div class="row">
+    <table style="width: 100%">
+      <tr>
+        <td>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
+                <h5>Local:</h5>
+                <input maxlength="50" [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9', 'width' : '555px' }" type="text" ID="txtSigla" [(ngModel)]="locaisReserva.titulo" name="Local" class="form-control" placeholder="Local">
+              </div>
+        </td>
+        <td rowspan="2" align="left" style="vertical-align: bottom; width: 570px">
+            <!-- Upload de Fotos -->
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              <table>
+                <tr>
+                  <td>
+                      <img *ngIf="Imagem()" id="imgLocaisReserva" [src]="_sanitizer.bypassSecurityTrustUrl(imagem)" sizeLimit="4000000"  height="218px" width="355px" />
+                  </td>
+                </tr>
+                <tr>
+                    <td style="height: 12px"></td>
+                  </tr>                
+                <tr>
+                    <td>
+                      <input #file accept="image/*" type="file" (change)="upload(file.files)" />
+                    </td>
+                  </tr>                
+              </table>
+            </div>
+            <!-- Fim Upload de Fotos -->
+          </td>
+      </tr>
+      <tr>
+        <td style="width: 558px">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <h5>Descrição (Portal):</h5>
+                <textarea name="txtDescricaoPortal" [(ngModel)]="locaisReserva.descricaoPortal" rows="2" cols="20"
+                  id="txtDescricaoPortal" class="form-control" placeholder="Descrição Portal" maxlength="500"
+                  
+                  [ngStyle]="{'backgroundColor': this.required == true ? 'LightSalmon' : '#FAFAD9', 'width' : '555px', 'height' : '200px' }"></textarea>
+              </div>          
+        </td>
+
+      </tr>
+    </table>
+
+  </div>
+<!--
+  <div class="row">
+
+  </div> -->
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <h5>Descrição (Leia Mais):</h5>
+      <ckeditor [editor]="Editor" [(ngModel)]="locaisReserva.descricao" [config]="Config" rows="2" cols="20"
+        data="Descrição Leia Mais"></ckeditor>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <br>
+      <input type="checkbox" [(ngModel)]="locaisReserva.ativo" name="ativo">Ativo:
+    </div>
+  </div>
